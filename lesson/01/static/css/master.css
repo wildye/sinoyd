@@ -1,0 +1,107 @@
+body {
+  font-family: '微软雅黑', 'Microsoft YaHei';
+}
+a {
+  text-decoration: none;
+}
+.login {
+  margin: 0 auto;
+  padding: 10px;
+  width: 475px;
+  min-height: 424px;
+  box-sizing: border-box;
+  background: #39a6eb;
+}
+.btn {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  color: inherit;
+  background: #89CAF4;
+  border: 1px solid #589CC9;
+  border-top: none;
+  box-sizing: inherit;
+  cursor: pointer;
+}
+.btn.active {
+  border: 0;
+  background: #E1F2FC;
+}
+.box,
+.footer {
+  width: 100%;
+  background: #E1F2FC;
+  text-align: center;
+}
+.box {
+  clear: both;
+  padding-top: 15px;
+  min-height: 300px;
+}
+.box .normal {
+  display: display;
+  overflow: hidden;
+}
+.box .normal input {
+  margin: 15px auto 0;
+  padding-left: 40px;
+  display: block;
+  width: 310px;
+  height: 46px;
+  border: 1px solid #c8ccd5;
+  line-height: 50px;
+}
+.box .normal p {
+  position: relative;
+  z-index: 10;
+  display: block;
+  margin: 15px auto;
+  width: 350px;
+  font-size: 14px;
+  line-height: 40px;
+  color: #a7aeb8;
+  border: 1px solid #a7aeb8;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  behavior: url(../lib/PIE/PIE.htc);
+}
+.box .normal button {
+  width: 350px;
+  height: 46px;
+  font-size: 20px;
+  color: #aad5e5;
+  background: #79b1d4;
+  border: none;
+}
+.box .qr {
+  display: none;
+}
+.box .qr a {
+  display: inline-block;
+  font-weight: 600;
+  margin: 0 3px;
+}
+.icon {
+  background-image: url(../image/icons.png);
+  background-repeat: no-repeat;
+}
+.icon.email {
+  background-position: 5px 3px;
+}
+.icon.pwd {
+  background-position: 5px -45px;
+}
+.footer {
+  font-size: 14px;
+  line-height: 40px;
+}
+.footer > a {
+  display: inline-block;
+  margin: 0 10px;
+}
+/*# sourceMappingURL=master.css.map */

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <title>PageSlide Test</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      /*overflow: hidden;*/
+    }
+
+    #container,
+    .items,
+    .item {
+      height: 100%;
+      position: relative;
+    }
+
+    #container {
+      margin: 0 auto;
+      width: 700px;
+      height: 450px;
+      border: 3px solid #000;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .items {
+      width: 400%;
+    }
+
+    .item {
+      width: 25%;
+      float: left;
+      background-size: cover; /* IE8下为拉伸填充 */
+      /*background-size: 100%100%; !* 拉伸填充 *!*/
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+    }
+
+    :root #item0,
+    :root #item1,
+    :root #item2,
+    :root #item3 {
+      filter: none; /* 解决IE9 filter 生效问题 */
+    }
+    #item0 {
+      background-image: url("../static/image/img-1.jpg");
+      background-image: none\9; /* IE9及以下取消背景图，使用 filter 方式 */
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/image/img-1.jpg', sizingMethod='scale'); /* IE9及以下使用 filter 方式引入背景图 */
+    }
+    #item1 {
+      background-image: url("../static/image/img-2.jpg");
+      background-image: none\9;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/image/img-2.jpg', sizingMethod='scale');
+    }
+    #item2 {
+      background-image: url("../static/image/img-3.jpg");
+      background-image: none\9;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/image/img-3.jpg', sizingMethod='scale');
+    }
+    #item3 {
+      background-image: url("../static/image/img-4.jpg");
+      background-image: none\9;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/image/img-4.jpg', sizingMethod='scale');
+    }
+  </style>
+
+</head>
+<body>
+
+<div id="container" data-PageSlide>
+  <div class="items">
+    <div class="item active" id="item0"></div>
+    <div class="item" id="item1"></div>
+    <div class="item" id="item2"></div>
+    <div class="item" id="item3"></div>
+  </div>
+  <div class="pages"></div>
+</div>
+
+<script src="../static/js/jquery-1.12.4.js"></script>
+<script>
+
+  ;(function ($) {
+    "use strict";
+
+    // 将插件所有方法包装到对象上
+    var PageSlide = (function () {
+
+      function PageSlide(element, options) {
+
+        // 选择器返回的DOM元素
+        this.element = element;
+
+        // 合并配置参数
+        this.settings = $.extend({}, $.fn.PageSlide.defaults, options || {});
+
+        this.init();
+        this.pagesCount();
+        this.prev();
+        this.next();
+        this._scrollPage();
+      }
+
+      PageSlide.prototype = {
+
+        // 初始化dom结构，布局，分页及绑定事件
+        init: function () {
+
+          var self = this;
+
+          // 获取 dom 元素
+          self.selectors = self.settings.selectors;
+          self.items = self.element.find(self.selectors.items); // 获取页面容器元素
+          self.item = self.items.find(self.selectors.item);     // 获取页面项
+
+          // 追加首元素至末尾.用以css无缝切换
+          self.item.eq(1).clone().appendTo(self.items);
+
+          console.log("init");
+        },
+
+        // 获取页面数量
+        pagesCount: function () {
+          console.log("pagesCount");
+        },
+
+        // 上一页
+        prev: function () {
+          console.log("prev");
+        },
+
+        // 下一页
+        next: function () {
+          console.log("next");
+        },
+
+        // 切换页面
+        _scrollPage: function () {
+          console.log("_scrollPage");
+        }
+
+      };
+
+      return PageSlide;
+    })();
+
+    // 注册 jQuery 组件
+    $.fn.PageSlide = function (options) {
+
+      // 实现单例模式
+      return this.each(function () {
+        var me = $(this),
+            instance = me.data("PageSlide"); // 获取实例对象
+
+        // 若无此实例，在创建实例对象
+        if (!instance) {
+          me.data("PageSlide", (instance = new PageSlide(me, options)));
+        }
+        // 若实例已存在，直接返回
+        if ($.type(options) === "string") return instance[options]();
+      });
+
+    };
+
+    // 默认配置参数
+    $.fn.PageSlide.defaults = {
+      selectors: {
+        items: ".items",
+        item: ".item",
+        page: ".pages",
+        active: ".active",
+      },
+      index: 0,         // 初始页索引
+      loop: false,      // 启用循环切换
+      speed: 500,       // 循环切换间隔
+      pagination: true, // 启用分页
+      keyboard: true    // 启用键盘控制
+    };
+
+  })(jQuery);
+
+  // 实例化插件对象
+  $(function () {
+    $('[data-PageSlide]').PageSlide({
+      speed: 2000,   // 循环切换间隔
+    });
+  });
+
+</script>
+</body>
+</html>
