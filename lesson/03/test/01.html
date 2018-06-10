@@ -16,24 +16,24 @@
     .items,
     .item {
       height: 100%;
-      position: relative;
     }
 
-    #container {
-      margin: 0 auto;
-      width: 700px;
-      height: 450px;
-      border: 3px solid #000;
-      z-index: 2;
-      overflow: hidden;
-    }
+    /*#container {*/
+      /*margin: 0 auto;*/
+      /*width: 700px;*/
+      /*height: 450px;*/
+      /*border: 3px solid #000;*/
+      /*z-index: 2;*/
+      /*overflow: hidden;*/
+    /*}*/
 
     .items {
-      width: 400%;
+      position: relative;
+      width: 500%;
     }
 
     .item {
-      width: 25%;
+      width: 20%;
       float: left;
       background-size: cover; /* IE8下为拉伸填充 */
       /*background-size: 100%100%; !* 拉伸填充 *!*/
@@ -66,6 +66,10 @@
       background-image: url("../static/image/img-4.jpg");
       background-image: none\9;
       filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/image/img-4.jpg', sizingMethod='scale');
+    }
+
+    .pages {
+      position: absolute;
     }
   </style>
 
@@ -100,10 +104,6 @@
         this.settings = $.extend({}, $.fn.PageSlide.defaults, options || {});
 
         this.init();
-        this.pagesCount();
-        this.prev();
-        this.next();
-        this._scrollPage();
       }
 
       PageSlide.prototype = {
@@ -113,35 +113,70 @@
 
           var self = this;
 
-          // 获取 dom 元素
           self.selectors = self.settings.selectors;
+
+          // 获取 dom 元素
           self.items = self.element.find(self.selectors.items); // 获取页面容器元素
-          self.item = self.items.find(self.selectors.item);     // 获取页面项
+          self.item  = self.items.find(self.selectors.item);    // 获取页面项
+          self.pages = self.element.find(self.selectors.page);  // 获取分页控制
 
           // 追加首元素至末尾.用以css无缝切换
-          self.item.eq(1).clone().appendTo(self.items);
+          self.item.eq(0).clone().appendTo(self.items);
 
           console.log("init");
+
+          // 生成控制点
+          if (self.settings.pagination) self._PageControl();
+
+          self.next();
+
         },
 
         // 获取页面数量
         pagesCount: function () {
-          console.log("pagesCount");
+          var self = this;
+          console.log(self.item);
+          console.log(self.item.length);
+          return self.item.length;
         },
 
         // 上一页
         prev: function () {
-          console.log("prev");
+          var self = this;
+
+          self.settings.index++;
+          self._switchPage();
         },
 
         // 下一页
         next: function () {
-          console.log("next");
+          var self = this;
+
+          self.settings.index--;
+          self._switchPage();
         },
 
         // 切换页面
-        _scrollPage: function () {
-          console.log("_scrollPage");
+        _switchPage: function () {
+          var self = this,
+              size = self.pagesCount();
+
+        },
+
+        // 控制点
+        _PageControl: function () {
+          var self = this,
+              size = self.pagesCount();
+
+          // 生成滑动标识元素span
+          for (var i = 0; i < size; i++) {
+            self.pages.append("<span></span>");
+          }
+
+          // 默认高亮标识
+          self.pages.children("span").eq(self.settings.index).addClass("on");
+
+          console.log("_addPageControl");
         }
 
       };
