@@ -11,7 +11,7 @@ $().ready(function(){
 
   var size = $(".banner li img").size();
 
-  // c
+  // 生成滑动标识元素span
   for (i = 0; i < size - 1; i++) {
     $(".banner .intro").append("<span></span>");
   }

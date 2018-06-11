@@ -1,66 +1,87 @@
-* {
+html,
+body {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  height: 100%;
 }
-html {
-  font-size: 12px;
-}
-.img-reponse {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-.banner {
-  position: relative;
-  margin: 2rem auto;
-  width: 1366px;
-  height: 768px;
+[data-PageSlide] {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
-.banner .box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6830px;
+[data-PageSlide]:hover .btn {
+  opacity: 1;
+}
+.items {
+  position: relative;
   height: inherit;
 }
-.banner .box img {
+.item {
   float: left;
+  height: inherit;
+  background-size: cover;
+  /* IE8下为拉伸填充 */
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: none\9;
+  /* IE9及以下取消背景图，使用 filter 方式引入背景图 */
 }
-.banner .intro {
+:root .item {
+  filter: none;
+  /* 解决IE9 filter 生效问题 */
+}
+.item1 {
+  background-image: url("../image/img-1.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-1.jpg', sizingMethod='scale');
+}
+.item2 {
+  background-image: url("../image/img-2.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-2.jpg', sizingMethod='scale');
+}
+.item3 {
+  background-image: url("../image/img-3.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-3.jpg', sizingMethod='scale');
+}
+.item4 {
+  background-image: url("../image/img-4.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-4.jpg', sizingMethod='scale');
+}
+.pages {
   position: absolute;
-  bottom: .3rem;
   width: 100%;
+  bottom: 20px;
   text-align: center;
 }
-.intro span {
-  display: inline-block;
-  margin: 0 .5rem;
-  padding: 0 1.2rem;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+.pages > span {
+  display: block;
+  float: left;
+  margin: 0 7px;
+  width: 15px;
+  height: 15px;
+  background: #ccc;
   cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  behavior: url(../lib/PIE/PIE.htc);
 }
-.intro span.on {
-  background: #4DBAAD;
+.pages > span.on {
+  background: #39a6eb;
 }
 .btn {
   position: absolute;
   top: 50%;
-  margin-top: -3.5rem;
-  padding: 1.2rem .5rem;
-  font-family: "宋体";
-  font-size: 4rem;
-  text-align: center;
-  color: azure;
-  background: rgba(0, 0, 0, 0.5);
+  width: 20px;
+  height: 20px;
+  color: transparent;
+  background: #000;
   cursor: pointer;
-  transition: all 0.5s ease 0s;
   opacity: 0;
-}
-.banner:hover .btn {
-  opacity: 1;
+  z-index: 2;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  behavior: url(../lib/PIE/PIE.htc);
 }
 .btn.L {
   left: 0;

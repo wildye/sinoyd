@@ -1,82 +1,107 @@
-* {
+.border-radius-ie8(@size) {
+  z-index: 2;
+  border-radius:@size;
+  -moz-border-radius:@size;
+  -webkit-border-radius:@size;
+  behavior: url(../lib/PIE/PIE.htc);
+}
+
+html, body {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  height: 100%;
 }
 
-html {
-  font-size: 12px;
-}
-
-.img-reponse {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.banner {
-  position: relative;
-  margin: 2rem auto;
-  width: 1366px;
-  height: 768px;
-  overflow: hidden;
-}
-
-.banner .box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6830px;
-  height: inherit;
-}
-
-.banner .box img {
-  float: left;
-}
-
-.banner .intro {
-  position: absolute;
-  bottom: .3rem;
+[data-PageSlide] {
   width: 100%;
-  text-align: center;
-}
+  height: 100%;
 
-.intro span {
-  display: inline-block;
-  margin: 0 .5rem;
-  padding: 0 1.2rem;
-  border-radius: 50%;
-  background: rgba(0,0,0,.5);
-  cursor: pointer;
+  overflow: hidden;
 
-  &.on {
-    background: #4DBAAD;
+  &:hover .btn {
+    opacity: 1;
   }
 }
 
-.btn {
+.items {
+  position: relative;
+  height: inherit;
+}
+
+.item {
+  float: left;
+  height: inherit;
+  background-size: cover; /* IE8下为拉伸填充 */
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: none\9; /* IE9及以下取消背景图，使用 filter 方式引入背景图 */
+}
+
+:root .item {
+  filter: none; /* 解决IE9 filter 生效问题 */
+}
+.item1 {
+  background-image: url("../image/img-1.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-1.jpg', sizingMethod='scale');
+}
+.item2 {
+  background-image: url("../image/img-2.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-2.jpg', sizingMethod='scale');
+}
+.item3 {
+  background-image: url("../image/img-3.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-3.jpg', sizingMethod='scale');
+}
+.item4 {
+  background-image: url("../image/img-4.jpg");
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/img-4.jpg', sizingMethod='scale');
+}
+
+.pages {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+
+  text-align: center;
+
+  > span {
+    display: block;
+    float: left;
+
+    margin: 0 7px;
+    width: 15px;
+    height: 15px;
+
+    background: #ccc;
+    cursor: pointer;
+
+    .border-radius-ie8(50%);
+
+  }
+
+  > span.on {
+    background: #39a6eb;
+  }
+}
+
+.btn{
   position: absolute;
   top:50%;
-  margin-top: -3.5rem;
-  padding: 1.2rem .5rem;
-  font-family: "宋体";
-  font-size: 4rem;
-  text-align: center;
-  color: azure;
-  background: rgba(0,0,0,.5);
+
+  width: 20px;
+  height: 20px;
+
+  color: transparent;
+  background: #000;
   cursor: pointer;
-  transition: all 0.5s ease 0s;
   opacity: 0;
+
+  .border-radius-ie8(50%);
 }
 
-.banner:hover .btn {
-  opacity: 1;
-}
-
-.btn.L {
+.btn.L{
   left: 0;
 }
-
-.btn.R {
+.btn.R{
   right: 0;
 }
+
