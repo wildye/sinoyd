@@ -17,7 +17,7 @@ body {
 }
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: 700px;
   border-top: 3px solid #FF4400;
 }
 .crumb {
@@ -46,6 +46,8 @@ body {
 .group .row {
   display: flex;
   padding: 0 15px;
+  max-height: 80px;
+  overflow: hidden;
 }
 .group .row:not(:last-child) {
   border-bottom: 1px dashed #ccc;
@@ -67,6 +69,18 @@ body {
   cursor: pointer;
 }
 .row .foot {
-  width: 150px;
+  width: 100px;
+  text-align: right;
+}
+.row .foot span {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.row .foot span:first-child {
+  height: 20px;
+  line-height: 20px;
+  border: 1px solid #ccc;
 }
 /*# sourceMappingURL=master.css.map */

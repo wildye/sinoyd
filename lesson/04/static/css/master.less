@@ -19,7 +19,7 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: 700px;
   border-top: 3px solid #FF4400;
 }
 
@@ -51,12 +51,13 @@ body {
 
 .group {
   padding: 0 5px;
-
   border: 1px dashed #ccc;
 
   .row {
     display: flex;
     padding: 0 15px;
+    max-height: 80px;
+    overflow: hidden;
 
     &:not(:last-child) {
       border-bottom: 1px dashed #ccc;
@@ -89,6 +90,20 @@ body {
   }
 
   .foot {
-    width: 150px;
+    width: 100px;
+    text-align: right;
+
+    span {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 0 5px;
+      cursor: pointer;
+
+      &:first-child {
+        height: 20px;
+        line-height: 20px;
+        border: 1px solid #ccc;
+      }
+    }
   }
 }
