@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="static/css/master.css">
+</head>
+<body>
+<div class="container">
+  <div class="crumb">
+    <a class="fl"><span>所有分类 ></span></a>
+    <a CLASS="fr toggle-btn"><span>显示筛选</span></a>
+  </div>
+  <div class="group">
+    <div class="row">
+      <div class="head">品牌：</div>
+      <div class="body"></div>
+      <div class="foot"></div>
+    </div>
+    <div class="row">
+      <div class="head">产地：</div>
+      <div class="body"></div>
+      <div class="foot"></div>
+    </div>
+    <div class="row">
+      <div class="head">价格：</div>
+      <div class="body"></div>
+      <div class="foot"></div>
+    </div>
+  </div>
+</div>
+<script src="../lib/jquery-1.12.4.js"></script>
+<script>
+  (function($) {
+
+    $(".toggle-btn").on("click", function() {
+      var me = $(this).children("span"), box = $(".group");
+      me.text(box.css("display") === "block" ? "显示筛选" : "隐藏筛选");
+      box.slideToggle();
+    });
+
+    var promise = new Promise(function(resolve, reject) {
+      $.get("./data.json", function(data){
+        resolve(data);
+      }, "json");
+    });
+
+    promise.then(function (data) {
+
+      var brand = data.map(function (val) {
+        return val.brand;
+      }).uniq();
+
+      var yieldly = data.map(function (val) {
+        return val.yieldly;
+      }).uniq();
+
+      var price = data.map(function (val) {
+        return val.price;
+      }).uniq();
+
+      var item = $(".body");
+
+      addElem(item.eq(0), brand, "span");
+      addElem(item.eq(1), yieldly, "span");
+      addElem(item.eq(2), price, "span");
+    });
+
+    //
+    function addElem(el, arr, elType) {
+      el.append(arr.reduce(function(val, newVal) {
+        return val + "<" + elType + ">" + newVal + "</" + elType + ">";
+      }, ""))
+    }
+
+    // 数组去重
+    Array.prototype.uniq = function(){
+      var arr = [], me = this, len = me.length;
+      for (var i = 0; i < len; i++) {
+        for (var j = i + 1; j < len; j++) {
+          if (me[i] === me[j]) j = ++i;
+        }
+        arr.push(me[i]);
+      }
+      return arr;
+    }
+  })(jQuery)
+</script>
+</body>
+</html>

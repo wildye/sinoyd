@@ -1,0 +1,72 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.btn {
+  border: 1px solid #ccc;
+}
+body {
+  font-family: "微软雅黑", 'Microsoft YaHei', sans-serif;
+  font-size: 12px;
+}
+.container {
+  margin: 0 auto;
+  width: 960px;
+  border-top: 3px solid #FF4400;
+}
+.crumb {
+  position: relative;
+  padding: 5px 0 5px 20px;
+  height: 30px;
+  line-height: 30px;
+}
+.crumb > a {
+  display: block;
+}
+.crumb > a.toggle-btn {
+  padding: 5px 10px;
+  line-height: 20px;
+  background: #eee;
+  cursor: pointer;
+}
+.crumb::after {
+  content: "";
+  clear: both;
+}
+.group {
+  padding: 0 5px;
+  border: 1px dashed #ccc;
+}
+.group .row {
+  display: flex;
+  padding: 0 15px;
+}
+.group .row:not(:last-child) {
+  border-bottom: 1px dashed #ccc;
+}
+.group .row > div {
+  line-height: 40px;
+  display: inline-block;
+}
+.row .head {
+  width: 50px;
+  color: #ccc;
+}
+.row .body {
+  flex: 1;
+}
+.row .body > span {
+  display: inline-block;
+  padding: 0 15px;
+  cursor: pointer;
+}
+.row .foot {
+  width: 150px;
+}
+/*# sourceMappingURL=master.css.map */
