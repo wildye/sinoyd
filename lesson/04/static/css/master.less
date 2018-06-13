@@ -2,16 +2,23 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.fl {
-  float: left;
+.btn {
+  padding: 5px 10px;
+
+  line-height: 20px;
+  cursor: pointer;
+
+  &.toggle {
+    background: #eee;
+  }
+
+  &.submit {
+    margin-left: 5px;
+    color: #fff;
+    background: #FF4400;
+  }
 }
 
-.fr {
-  float: right;
-}
-.btn {
-  border: 1px solid #ccc;
-}
 body {
   font-family: "微软雅黑", 'Microsoft YaHei', sans-serif;
   font-size: 12px;
@@ -19,33 +26,52 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 700px;
   border-top: 3px solid #FF4400;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 700px;
+  }
+  @media (min-width: 960px) {
+    width: 960px;
+  }
 }
 
 .crumb {
   position: relative;
+  display: flex;
   padding: 5px 0 5px 20px;
+  box-sizing: border-box;
 
-  height: 30px;
+  width: 100%;
   line-height: 30px;
 
-  > a {
-    display: block;
+  .head {
+    width: 50px;
   }
 
-  > a.toggle-btn {
-    padding: 5px 10px;
+  .keys {
+    flex: 1;
+    span {
+      display: inline-block;
+      margin:0 5px;
+      padding: 3px 7px;
 
-    line-height: 20px;
+      height: 20px;
+      line-height: 20px;
 
-    background: #eee;
-    cursor: pointer;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: all .2s ease 0s;
+
+      &:hover {
+        border-color: red;
+      }
+    }
   }
 
-  &::after {
-    content: "";
-    clear: both;
+  .foot {
+    text-align: right;
+    width: 140px;
   }
 }
 
@@ -56,7 +82,7 @@ body {
   .row {
     display: flex;
     padding: 0 15px;
-    max-height: 80px;
+    line-height: 40px;
     overflow: hidden;
 
     &:not(:last-child) {
@@ -64,7 +90,6 @@ body {
     }
 
     > div {
-      line-height: 40px;
       display: inline-block;
     }
   }
@@ -74,7 +99,7 @@ body {
 
   .head {
     width: 50px;
-    color: #ccc;
+    color: #666;
   }
 
   .body {
@@ -86,6 +111,10 @@ body {
       padding: 0 15px;
 
       cursor: pointer;
+
+      &:hover {
+        color: #FF4400;
+      }
     }
   }
 
@@ -102,7 +131,6 @@ body {
       &:first-child {
         height: 20px;
         line-height: 20px;
-        border: 1px solid #ccc;
       }
     }
   }

@@ -2,14 +2,18 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.fl {
-  float: left;
-}
-.fr {
-  float: right;
-}
 .btn {
-  border: 1px solid #ccc;
+  padding: 5px 10px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.btn.toggle {
+  background: #eee;
+}
+.btn.submit {
+  margin-left: 5px;
+  color: #fff;
+  background: #FF4400;
 }
 body {
   font-family: "微软雅黑", 'Microsoft YaHei', sans-serif;
@@ -17,27 +21,49 @@ body {
 }
 .container {
   margin: 0 auto;
-  width: 700px;
   border-top: 3px solid #FF4400;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 700px;
+  }
+}
+@media (min-width: 960px) {
+  .container {
+    width: 960px;
+  }
 }
 .crumb {
   position: relative;
+  display: flex;
   padding: 5px 0 5px 20px;
-  height: 30px;
+  box-sizing: border-box;
+  width: 100%;
   line-height: 30px;
 }
-.crumb > a {
-  display: block;
+.crumb .head {
+  width: 50px;
 }
-.crumb > a.toggle-btn {
-  padding: 5px 10px;
+.crumb .keys {
+  flex: 1;
+}
+.crumb .keys span {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 3px 7px;
+  height: 20px;
   line-height: 20px;
-  background: #eee;
+  border: 1px solid #ccc;
   cursor: pointer;
+  transition: all .2s ease 0s;
 }
-.crumb::after {
-  content: "";
-  clear: both;
+.crumb .keys span:hover {
+  border-color: red;
+}
+.crumb .foot {
+  text-align: right;
+  width: 140px;
 }
 .group {
   padding: 0 5px;
@@ -46,19 +72,18 @@ body {
 .group .row {
   display: flex;
   padding: 0 15px;
-  max-height: 80px;
+  line-height: 40px;
   overflow: hidden;
 }
 .group .row:not(:last-child) {
   border-bottom: 1px dashed #ccc;
 }
 .group .row > div {
-  line-height: 40px;
   display: inline-block;
 }
 .row .head {
   width: 50px;
-  color: #ccc;
+  color: #666;
 }
 .row .body {
   flex: 1;
@@ -67,6 +92,9 @@ body {
   display: inline-block;
   padding: 0 15px;
   cursor: pointer;
+}
+.row .body > span:hover {
+  color: #FF4400;
 }
 .row .foot {
   width: 100px;
@@ -81,6 +109,5 @@ body {
 .row .foot span:first-child {
   height: 20px;
   line-height: 20px;
-  border: 1px solid #ccc;
 }
 /*# sourceMappingURL=master.css.map */
