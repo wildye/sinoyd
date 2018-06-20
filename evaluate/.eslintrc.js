@@ -23,6 +23,9 @@ module.exports = {
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',
+	// 统一换行符，"\n" unix(for LF) and "\r\n" for windows(CRLF)，默认unix
+    // off或0: 禁用规则
+    'linebreak-style': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

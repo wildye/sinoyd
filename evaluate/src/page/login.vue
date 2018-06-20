@@ -1,13 +1,11 @@
 <template>
-  
 </template>
 
 <script>
-  export default {
-    name: "frame"
-  }
+export default {
+  name: "login"
+}
 </script>
 
 <style scoped>
-
 </style>
