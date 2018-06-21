@@ -1,8 +1,17 @@
 (function($) {
 
-  let crumb = getRequest();
-  console.log(crumb);
-  $(".keys").html(createElem(crumb, "span"));
+  let list = [{
+    brand: [],
+    locality: [],
+    price: []
+  }, {
+    brand: [],
+    locality: [],
+    price: []
+  }];
+
+  // let crumb = getRequest();
+  // $(".keys").html(createElem(crumb, "span"));
 
   // 读取数据
   let promise = new Promise(function(resolve) {
@@ -12,27 +21,41 @@
   });
 
   promise.then(function(data) {
+    list[0] = {
+      brand: readData("brand", data),
+      locality: readData("locality", data),
+      price: readData("price", data)
+    };
 
-    let brand = readData("brand", data),
-      yieldly = readData("yieldly", data),
-      price = readData("price", data);
+    // 渲染基础数据
+    let item = $(".body"),
+        brand = render(item.eq(0), list[0].brand),
+        locality = render(item.eq(1), list[0].locality);
+        // proce = render(item.eq(2), list.proce[0], 'span');
+    brand.on('click', function () {
+      list[1].brand.push($(this).text())
+    })
+    locality.on('click', function () {
+      list[1].locality.push($(this).text())
+    })
 
-    // 填充数据
-    let item = $(".body");
-    item.eq(0).append(createElem(brand, "span"));
-    item.eq(1).append(createElem(yieldly, "span"));
-    item.eq(2).append(createElem(price, "span"));
+    let checked = createElem(uniq(list[1].brand).sort()) + createElem(uniq(list[1].locality).sort());
+    render($('.key'), checked)
 
-    (function(){
-      $(".body:lt(2) span").on("click", function() {
-        crumb.push($(this).text());
-        let spans = createElem(crumb.uniq().sort(), "span");
-        $(".keys").html(spans).children("span").on("click", function () {
-          crumb.splice(crumb.indexOf($(this).text()), 1);
-          $(this).remove();
-        });
-      });
-    })();
+
+    // 渲染选中数据
+    list[1].map(function (val) {
+      console.log(val)
+    })
+    // render(list[1].brand)
+
+    // 绑定添加事件
+    // selected.brand.splice(selected.brand.indexOf($(this).text()), 1);
+
+    // 渲染DOM
+    function render (el, data) {
+      return el.html(createElem(uniq(data).sort(), 'span')).children('span')
+    }
 
     (function(){
       let span = $(".row .foot span");
@@ -80,7 +103,7 @@
   function readData(field, data) {
     return data.map(function (val) {
       return val[field];
-    }).uniq();
+    });
   }
 
   // 元素标签批量生成
@@ -101,13 +124,14 @@
   }
 
   // 数组去重
-  Array.prototype.uniq = function(){
-    let arr = [], me = this, len = me.length;
+  function uniq(data) {
+    let arr = [],
+        len = data.length;
     for (let i = 0; i < len; i++) {
       for (let j = i + 1; j < len; j++) {
-        if (me[i] === me[j]) j = ++i;
+        if (data[i] === data[j]) j = ++i;
       }
-      arr.push(me[i]);
+      arr.push(data[i]);
     }
     return arr;
   }
