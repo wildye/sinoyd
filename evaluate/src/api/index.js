@@ -1,20 +1,20 @@
-// 配置API接口地址
-var root = '/api/'
+import store from '../store'
+
 // 引用axios
 var axios = require('axios')
 
-var isHeaders = true
+// 配置API接口地址
+var root = '/api/'
 
 // todo: 接口处理函数
 function apiAxios (method, url, params, success, failure) {
-  axios.headers =
   axios({
     method: method,
     url: url,
     data: method === 'POST' || method === 'PUT' ? params : null,
     params: method === 'GET' || method === 'DELETE' ? params : null,
     baseURL: root,
-    headers: isHeaders ? { 'authorization': 'Bearer ' + localStorage.getItem('JWT_TOKEN') } : {},
+    headers: store.state.login ? { 'authorization': 'Bearer ' + store.state.token } : {},
     withCredentials: false,
     validateStatus (status) {
       return status

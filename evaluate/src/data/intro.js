@@ -7,8 +7,8 @@ export default{
     },
     {
       id: 2,
-      username: 'yeziheng',
-      password: 'yeziheng'
+      username: 'liziheng',
+      password: 'liziheng'
     },
     {
       id: 3,

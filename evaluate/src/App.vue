@@ -22,16 +22,16 @@ export default {
 </script>
 
 <style lang="less">
-  @import "./style/style";
-  html,body{
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  height: 100%;
-  width: 100%;
-}
-#app {
-  width: 100%;
-  height: 100%;
-}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+  }
+  #app {
+    width: inherit;
+    height: inherit;
+  }
 </style>

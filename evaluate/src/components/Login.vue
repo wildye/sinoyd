@@ -13,7 +13,7 @@
         <div class="loginTo" v-show="userCheck">
           <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm from1">
             <el-form-item class="lab1" label="用户名:" prop="pass">
-              <el-input class="ipt1" type="text" v-model="ruleForm2.pass" auto-complete="off" ref="user"></el-input>
+              <el-input class="ipt1" id="ipt1" type="text" v-model="ruleForm2.pass" auto-complete="off" ref="user"></el-input>
             </el-form-item>
             <el-form-item class="lab1" label="密码:" prop="checkPass">
               <el-input class="ipt2" type="password" v-model="ruleForm2.checkPass" auto-complete="off" ref="word"></el-input>
@@ -102,6 +102,11 @@ export default {
           id: 3,
           username: 'yeye',
           password: 'yeye'
+        },
+        {
+          id: 4,
+          username: 'test',
+          password: 'test'
         }
       ]
     }
@@ -119,6 +124,13 @@ export default {
         console.log('登录成功')
         this.$router.push({path: '/answer'})
       }
+      this.$ajax.post('/api/', {headers: {'Content-Type': 'application/json'}})
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
     admin () {
       if (this.check === true) {
@@ -162,6 +174,8 @@ export default {
   font-family: cursive;
   background-image: url(./../../static/image/001.jpg);
   background-repeat: no-repeat;
+  background-size:100% 100%;
+  background-attachment: fixed;
   opacity: .7;
 }
 .login-top{
@@ -186,7 +200,7 @@ export default {
 .login-main{
   width: 500px;
   height: 400px;
-  background-color: @login-bc;
+  background-color: rgba(166, 210, 218, .3);
   position: relative;
   left: 0;
   right: 0;
@@ -196,6 +210,7 @@ export default {
     width: 100%;
     height: 18%;
     border-bottom: 1px solid white;
+    box-sizing: border-box;
     .check-user{
       width: 50%;
       height: 100%;
@@ -274,6 +289,7 @@ export default {
 }
 .lab1{
   margin-left:30px;
+  color:#86C9CE;
 }
 .lab2{
   margin-left:30px;

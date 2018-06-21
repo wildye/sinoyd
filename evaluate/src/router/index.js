@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Link from '@/components/Link'
-import Login from '@/components/Login'
-import answer from '@/components/answer'
-import ApiTest from '@/components/ApiTest'
+
+// page module
+import Link from '../components/Link'
+import Login from '../components/Login'
+import answer from '../components/answer'
+import ApiTest from '../components/ApiTest'
 
 Vue.use(Router)
 

@@ -23,6 +23,8 @@ export default {
   position: relative;
   background-image: url(./../../static/image/001.jpg);
   background-repeat: no-repeat;
+  background-size:100% 100%;
+  background-attachment: fixed;
   opacity: .7;
 }
 .login-text{
