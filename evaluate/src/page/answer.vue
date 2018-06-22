@@ -1,7 +1,7 @@
 <template>
     <div class="answer">
        <div class="answer-top">
-        <img class="imgOne" src="./../../static/image/logo.svg"/>
+        <img class="imgOne" src="../../static/image/logo.svg"/>
         <span class="spn1">团队角色自我知觉问卷</span>
         <div class="emp">员工&nbsp;:&nbsp;{{employees}}</div>
       </div>
@@ -215,7 +215,7 @@ export default {
   color: @login-bc;
   display: block;
   width: 20px;
-  height: 20px;;
+  height: 20px;
   position: absolute;
   top: 25px;
   right: 300px;

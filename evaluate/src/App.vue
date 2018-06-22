@@ -34,4 +34,10 @@ export default {
     width: inherit;
     height: inherit;
   }
+  h1 {
+    font-weight: 300;
+  }
+  .text-center {
+    text-align: center;
+  }
 </style>

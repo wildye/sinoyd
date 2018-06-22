@@ -1,46 +1,49 @@
 <template>
-  <div class="login">
-    <router-link class="login-text" to="/login">点击进入员工答题问卷</router-link>
-    <router-link class="link1" to="/Apis">API测试</router-link>
-  </div>
+  <el-container>
+    <el-aside width="200px" class="hidden-sm-and-up">
+      <NavAside/>
+    </el-aside>
+    <el-container>
+      <el-header>
+        <NavTop/>
+      </el-header>
+      <el-main>Main</el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
+import NavTop from '../components/NavTop'
+import NavAside from '../components/NavAside'
 export default {
   name: 'login',
+  components: { NavTop, NavAside },
   data () {
     return {
-      // msg: '点击进入答题评分系统'
+
     }
+  },
+  created () {
+
   }
 }
 </script>
 
-<style scoped lang="less">
-  .login{
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    background: url(/static/image/001.jpg) no-repeat fixed;
-    background-size: contain;
-
-    opacity: .7;
+<style lang="less">
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
   }
-  .login-text{
-    position: absolute;
-    top: 200px;
-    left: 0;
-    right: 0;
 
-    margin: auto;
-    width: 620px;
+  .el-aside {
+    background-color: #D3DCE6;
+  }
 
-    font-size: 60px;
-    font-family: cursive;
-    text-decoration: none;
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+  }
 
-    color: white;
+  .el-container {
+    height: 100%;
   }
 </style>
