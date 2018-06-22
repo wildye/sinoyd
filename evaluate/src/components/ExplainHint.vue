@@ -25,6 +25,9 @@ export default {
       ]
     }
   },
+  created () {
+    this.showHint = true
+  },
   computed: {
     response: () => {
       let deviceWidth = document.documentElement.clientWidth
