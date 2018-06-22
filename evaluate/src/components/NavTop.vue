@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span>Nav-Top</span>
     <ExplainHint/>
   </div>
 </template>
