@@ -1,10 +1,14 @@
 <template>
-  <div><h1>Header</h1></div>
+  <div>
+    <ExplainHint/>
+  </div>
 </template>
 
 <script>
+import ExplainHint from './ExplainHint'
 export default {
-  name: 'NavTop'
+  name: 'NavTop',
+  components: { ExplainHint }
 }
 </script>
 

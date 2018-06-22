@@ -6,17 +6,14 @@
 
 <script>
 import intro from './data/intro.js'
+import 'element-ui/lib/theme-chalk/index.css'
 
 export default {
   name: 'App',
-  components: {
-  },
   data () {
     return {
       lists: intro.lists
     }
-  },
-  methods: {
   }
 }
 </script>

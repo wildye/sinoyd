@@ -2,7 +2,7 @@
   <el-row type="flex" justify="center" align="middle">
     <el-col :span="24" :sm="14" :md="12" :lg="8">
       <h1 class="text-center">团队角色自我知觉<br />问卷调查</h1>
-      <el-tabs v-model="activeName" stretch @tab-click="handleClick">
+      <el-tabs v-model="activeName" stretch>
         <el-tab-pane label="员工登录" name="user">
           <LoginForm :loginRole = "activeName"/>
         </el-tab-pane>
@@ -28,9 +28,6 @@ export default {
     }
   },
   methods: {
-    handleClick (tab, event) {
-      // console.log(tab, event)
-    }
   }
 }
 </script>
@@ -38,8 +35,8 @@ export default {
 <style scoped lang="less">
   .el-row {
     height: 100%;
-    background: url(/static/image/bg.jpg) no-repeat fixed;
-    background-size:100% 100%;
+    background: url(/static/image/bg.jpg) no-repeat 50% 50%;
+    background-size: cover;
   }
   .el-col {
     @media (max-width: 768px) {
