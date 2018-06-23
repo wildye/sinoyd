@@ -1,18 +1,26 @@
 import Vue from 'vue'
-import App from './App'
 import router from './router'
+
+// 引入组件
+import App from './App'
 import api from './api'
 import store from './store'
 import ElementUI from 'element-ui'
 
-Vue.prototype.$api = api
+// 全局绑定
 Vue.config.productionTip = false
+Vue.prototype.$api = api
 Vue.use(ElementUI)
+
+// 引入静态资源
+require('element-ui/lib/theme-chalk/index.css')
+require('../static/css/font-awesome.min.css')
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  // api,
   store,
   render: h => h(App)
 }).$mount('#app')

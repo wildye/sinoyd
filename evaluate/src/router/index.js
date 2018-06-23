@@ -6,6 +6,7 @@ import Index from '../page/'
 import Login from '../page/login'
 import Survey from '../page/survey'
 import Summary from '../page/summary'
+import Answer from '../page/answer'
 
 import Apis from '../components/Apis'
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/port',
       name: 'api',
       component: Apis
+    },
+    {
+      path: '/answer',
+      name: 'answer',
+      component: Answer
     }
   ]
 })

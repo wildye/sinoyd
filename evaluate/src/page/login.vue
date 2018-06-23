@@ -1,7 +1,7 @@
 <template>
   <el-row type="flex" justify="center" align="middle">
     <el-col :span="24" :sm="14" :md="12" :lg="8">
-      <h1 class="text-center">团队角色自我知觉<br />问卷调查</h1>
+      <h1 class="text-center">问卷调查</h1>
       <el-tabs v-model="activeName" stretch>
         <el-tab-pane label="员工登录" name="user">
           <LoginForm :loginRole = "activeName"/>
@@ -10,9 +10,6 @@
           <LoginForm :loginRole = "activeName"/>
         </el-tab-pane>
       </el-tabs>
-      <router-link to="/port">
-        <el-button type="primary" style="margin-top: 15px">API Test</el-button>
-      </router-link>
     </el-col>
   </el-row>
 </template>
@@ -33,6 +30,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+  body {
+    background-color: #F5F6F7;
+  }
   .el-row {
     height: 100%;
     background: url(/static/image/bg.jpg) no-repeat 50% 50%;

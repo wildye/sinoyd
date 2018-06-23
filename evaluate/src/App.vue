@@ -5,14 +5,28 @@
 </template>
 
 <script>
-import intro from './data/intro.js'
-import 'element-ui/lib/theme-chalk/index.css'
 
 export default {
   name: 'App',
   data () {
     return {
-      lists: intro.lists
+      lists: [
+        {
+          id: 1,
+          username: 'zhenghao',
+          password: 'zhenghao'
+        },
+        {
+          id: 2,
+          username: 'liziheng',
+          password: 'liziheng'
+        },
+        {
+          id: 3,
+          username: 'yeye',
+          password: 'yeye'
+        }
+      ]
     }
   }
 }
@@ -20,21 +34,28 @@ export default {
 
 <style lang="less">
   html,
-  body {
+  body,
+  #app{
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     list-style: none;
   }
-  #app {
-    width: inherit;
-    height: inherit;
-  }
   h1 {
     font-weight: 300;
   }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
   .text-center {
     text-align: center;
+  }
+  .fl {
+    float: left;
+  }
+  .fr {
+    float: right;
   }
 </style>
