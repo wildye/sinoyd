@@ -3,23 +3,27 @@
     <el-aside
       width="70vw"
       class="hidden-sm-and-up"
-      :class="{show: showSideBar}">
+      :class="{show: $store.state.showSidebar}">
       <SideBar/>
     </el-aside>
-    <el-container class="content" :class="{show: showSideBar}">
+    <el-container
+      class="content"
+      :class="{show: $store.state.showSidebar}">
       <el-header height="50px">
-        <TopBar @fromNavTop="getShowSideBar"/>
+        <TopBar/>
       </el-header>
       <el-main>
-        {{ showSideBar }}
         <div class="container">
-          <el-card v-for="o in 10" :key="o" class="box-card">
+          <el-card v-for="o in 5" :key="o" class="box-card">
             <router-link to="/survey">
               <div class="text item">{{'团队角色自我知觉问卷 ' + o }}</div>
             </router-link>
           </el-card>
         </div>
-        <div class="shade" @click="showSideBar=false"></div>
+        <div
+          class="shade"
+          v-if="$store.state.showSidebar"
+          @click="hideSideBar"></div>
       </el-main>
     </el-container>
   </el-container>
@@ -41,9 +45,9 @@ export default {
     }
   },
   methods: {
-    getShowSideBar: function (data) {
-      this.showSideBar = data
-      console.log(this.showSideBar)
+    hideSideBar: function () {
+      this.$store.commit('switchSidebar')
+      console.log(this.$store.state.showSidebar)
     }
   }
 }
@@ -70,12 +74,12 @@ export default {
     }
   }
   .shade {
-    position: fixed;
     display: block;
-    width: 100vw;
+    position: fixed;
+    top: 50px;
+    width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, .5);
-    z-index: 10;
+    background: rgba(0, 0, 0, .2);
   }
   // 组件
   .el-aside {

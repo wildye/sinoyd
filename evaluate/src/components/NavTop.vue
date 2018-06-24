@@ -1,7 +1,7 @@
 <template>
   <div class="nav-top">
     <div class="fl">
-      <i class="el-icon-menu hidden-sm-and-up" @click="toIndex"></i>
+      <i class="el-icon-menu hidden-sm-and-up" @click="showSideBar"></i>
     </div>
     <h1 class="title">问卷列表</h1>
     <div class="fr">
@@ -22,13 +22,11 @@ export default {
   },
   data () {
     return {
-      showSideBar: false
     }
   },
   methods: {
-    toIndex: function () {
-      this.showSideBar = !this.showSideBar
-      this.$emit('fromNavTop', this.showSideBar)
+    showSideBar: function () {
+      this.$store.commit('switchSidebar')
     }
   }
 }

@@ -40,6 +40,7 @@ export default {
     height: 100%;
     width: 100%;
     list-style: none;
+    overflow: hidden;
   }
   h1 {
     font-weight: 300;

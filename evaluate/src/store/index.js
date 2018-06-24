@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: '',
-    isLogin: false
+    isLogin: false,
+    showSidebar: false
   },
   mutations: {
     setToken (state, val) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     delToken (state) {
       state.token = ''
+    },
+    switchSidebar (state) {
+      state.showSidebar = !state.showSidebar
     }
   }
 })

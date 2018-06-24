@@ -3,11 +3,11 @@
     <h1>
       <img src="/static/image/user-icon.svg" alt="">
     </h1>
-    <span>welcome, Hannah</span>
+    <span>欢迎，汉娜</span>
     <router-link to="/survey">
       <i class="el-icon-document"> 继续答卷</i>
     </router-link>
-    <router-link to="/survey">
+    <router-link to="/">
       <i class="el-icon-document"> 问卷列表</i>
     </router-link>
     <router-link to="/port">
