@@ -57,6 +57,7 @@ export default {
       this.$refs[info].validate((val) => {
         if (val) {
           if (this.loginRole === 'user') {
+            this.$store.commit('setIsLogin', true)
             console.log(' submit user!')
             this.$router.push('/')
           } else {

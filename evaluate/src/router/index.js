@@ -23,7 +23,13 @@ export default new Router({
       component: login
     },
     {
+      // 问卷列表
       path: '/survey',
+      component: survey
+    },
+    {
+      // 答卷页面
+      path: '/survey/:id',
       component: survey
     },
     {

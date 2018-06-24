@@ -13,15 +13,22 @@
     <router-link to="/port">
       <i class="el-icon-news"> Api Test</i>
     </router-link>
-    <router-link to="/port">
+    <a @click="logout">
       <i class="el-icon-news"> 退出</i>
-    </router-link>
+    </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavSide'
+  name: 'NavSide',
+  methods: {
+    logout: function () {
+      this.$store.commit('switchSidebar')
+      this.$store.commit('setIsLogin', false)
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

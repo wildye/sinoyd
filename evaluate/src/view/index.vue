@@ -1,7 +1,6 @@
 <template>
   <el-container class="wrap">
     <el-aside
-      width="70vw"
       class="hidden-sm-and-up"
       :class="{show: $store.state.showSidebar}">
       <SideBar/>
@@ -23,7 +22,8 @@
         <div
           class="shade"
           v-if="$store.state.showSidebar"
-          @click="hideSideBar"></div>
+          @click="hideSideBar">
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -47,13 +47,13 @@ export default {
   methods: {
     hideSideBar: function () {
       this.$store.commit('switchSidebar')
-      console.log(this.$store.state.showSidebar)
     }
   }
 }
 </script>
 
 <style lang="less">
+  @offset: 50vw;
   .wrap {
     position: relative;
     overflow: hidden;
@@ -63,7 +63,7 @@ export default {
     left: 0;
     transition: left .5s ease 0s;
     &.show {
-      left: 70vw;
+      left: @offset;
     }
   }
   .container {
@@ -84,15 +84,15 @@ export default {
   // 组件
   .el-aside {
     position: absolute;
-    left: -71vw;
-    width: 70vw;
+    left: -@offset;
+    width: @offset !important;
     height: 100%;
     background: #66B1FF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
     z-index: 1;
     transition: left .5s ease 0s;
     &.show {
       left: 0;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
     }
   }
   .el-container {

@@ -16,6 +16,9 @@ export default new Vuex.Store({
     delToken (state) {
       state.token = ''
     },
+    setIsLogin (state, val) {
+      state.isLogin = val
+    },
     switchSidebar (state) {
       state.showSidebar = !state.showSidebar
     }
