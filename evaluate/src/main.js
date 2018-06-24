@@ -14,7 +14,7 @@ Vue.use(ElementUI)
 
 // 引入静态资源
 require('element-ui/lib/theme-chalk/index.css')
-require('../static/css/font-awesome.min.css')
+require('element-ui/lib/theme-chalk/display.css')
 
 /* eslint-disable no-new */
 new Vue({

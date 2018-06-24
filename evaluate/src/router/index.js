@@ -1,48 +1,42 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// page module
-import Index from '../page/'
-import Login from '../page/login'
-import Survey from '../page/survey'
-import Summary from '../page/summary'
-import Answer from '../page/answer'
-
-import Apis from '../components/Apis'
+// view
+import home from '@/view/'
+import login from '../view/login'
+import survey from '../view/survey'
+import summary from '../view/summary'
+import apis from '../components/Apis'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: Index
+      alias: '/index',
+      component: home
     },
     {
       path: '/login',
-      name: 'login',
-      component: Login
+      component: login
     },
     {
       path: '/survey',
-      name: 'survey',
-      component: Survey
+      component: survey
     },
     {
       path: '/summary',
-      name: 'summary',
-      component: Summary
+      component: summary
     },
     {
       path: '/port',
-      name: 'api',
-      component: Apis
+      component: apis
     },
     {
-      path: '/answer',
-      name: 'answer',
-      component: Answer
+      path: '*',
+      redirect: '/'
     }
   ]
 })

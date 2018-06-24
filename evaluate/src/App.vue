@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data () {
@@ -46,7 +45,7 @@ export default {
     font-weight: 300;
   }
   a {
-    color: inherit;
+    color: #66B1FF;
     text-decoration: none;
   }
   .text-center {

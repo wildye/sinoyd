@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: '',
-    login: 0
+    isLogin: false
   },
   mutations: {
     setToken (state, val) {
@@ -14,12 +14,6 @@ export default new Vuex.Store({
     },
     delToken (state) {
       state.token = ''
-    },
-    setLogin (state, val) {
-      state.login = val
-    },
-    delLogin (state) {
-      state.login = 0
     }
   }
 })

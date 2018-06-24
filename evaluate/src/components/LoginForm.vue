@@ -11,18 +11,16 @@
         prepend="prepend"
         placeholder="username"
         v-model="info.username"
-        clearable
-      />
+        clearable/>
     </el-form-item>
     <el-form-item label="密码:" prop="password">
       <el-input
         type="password"
         placeholder="password"
         suffix-icon="el-icon-view"
-        v-model="info.password"
-      />
+        v-model="info.password"/>
     </el-form-item>
-    <el-button type="primary" @click="submitForm('info')">登录</el-button>
+    <el-button type="primary" @click="sendLogin('info')">登录</el-button>
   </el-form>
 </template>
 
@@ -55,11 +53,12 @@ export default {
     }
   },
   methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
+    sendLogin (info) {
+      this.$refs[info].validate((val) => {
+        if (val) {
           if (this.loginRole === 'user') {
             console.log(' submit user!')
+            this.$router.push('/')
           } else {
             console.log(' submit admin!')
           }
