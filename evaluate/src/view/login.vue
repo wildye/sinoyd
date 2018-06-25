@@ -24,6 +24,9 @@ export default {
       activeName: 'user'
     }
   },
+  created () {
+
+  },
   methods: {
   }
 }

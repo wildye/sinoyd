@@ -41,6 +41,10 @@ export default new Router({
       component: apis
     },
     {
+      path: '/Apis',
+      component: apis
+    },
+    {
       path: '*',
       redirect: '/'
     }

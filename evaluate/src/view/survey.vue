@@ -3,21 +3,12 @@
     <div class="answer-top">
       <img class="imgOne" src="../../static/image/logo.svg"/>
       <span class="spn1">团队角色自我知觉问卷</span>
-      <div class="emp">员工&nbsp;:&nbsp;{{employees}}</div>
+      <span class="spn3">已分配：{{readyNum}}</span>
+      <Explain/>
     </div>
     <div class="answer-main">
-      <div class="answer-main-left">
-        <span>答题说明：</span>
-        <div class="answer-intro">
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.本问卷共有7个部分，每部分有十项陈述。每部分的总分是10分。请将10分分配给你认为最准确地描述你的行为或感觉的项目上。</p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.你可以自由分配这10分，你认为哪一项越能反映你的行为或感受，就给这一项一个较高的分数；这10分既可以分别打给几项，也可以只打到一项上。</p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.注意：每一部分的总分必须是10分。</p>
-        </div>
-      </div>
-      <router-view/>
       <div class="answer-main-right">
         <el-tabs id="table1" :tab-position="tabPosition" style="height: 660px;">
-          <span class="spn3">已分配：{{readyNum}}</span>
           <el-tab-pane id="first" label="第一题">
             <div class="first">
               <span class="spn2">一&nbsp;：&nbsp;我认为自己能为团队做出的贡献是</span>
@@ -78,7 +69,12 @@
 </template>
 
 <script>
+import Explain from './../components/Explain'
+
 export default {
+  components: {
+    Explain
+  },
   data () {
     return {
       items: [
@@ -113,15 +109,17 @@ export default {
     height: 100%;
     .answer-top{
       width: 80%;
-      height: 70px;
-      background-color:@login-bc;
+      height: 50px;
+      background-color:white;
       margin: 0 auto;
       position: relative;
+      box-shadow: 0px 2px 2px #888888;
+      margin-bottom: 2px;
       .spn1{
         font-weight: 600;
         float: left;
-        color: white;
-        line-height: 70px;
+        color: @login-bc;
+        line-height: 50px;
         font-size: 25px;
         width: 270px;
         height: 100%;
@@ -134,15 +132,9 @@ export default {
       .imgOne{
         width: 80px;
         height: 40px;
-        margin-top: 15px;
+        margin-top: 5px;
         margin-left: 150px;
         float: left;
-      }
-      .emp{
-        color: white;
-        position: absolute;
-        right: 30px;
-        top: 40px;
       }
     }
     .answer-main{
@@ -150,28 +142,8 @@ export default {
       height: 660px;
       margin: 0 auto;
       box-sizing: border-box;
-      .answer-main-left{
-        width: 25%;
-        height: 100%;
-        background-color: @answer-bc;
-        float: left;
-        span{
-          color: red;
-          font-weight: 600;
-          font-size: 30px;
-          margin-left: 40px;
-          display: block;
-          margin-top: 50px;
-        }
-        .answer-intro{
-          width: 75%;
-          height: 70%;
-          margin: 0 auto;
-          margin-top: 10px;
-        }
-      }
       .answer-main-right{
-        width: 75%;
+        width: 100%;
         height: 100%;
         background-color: @answer-tc;
         float: right;
@@ -187,18 +159,30 @@ export default {
     height: 605px;
   }
   #table1{
-    padding-left: 50px;
     box-sizing: border-box;
     position: relative;
+    width: 60%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: white;
+    padding-left: 50px;
   }
   .spn3{
     position: absolute;
     top: 20px;
-    right: 50px;
-    font-weight: 600;
+    right: 70px;
+    color: #409EFF;
+    font-size: 14px;
+  }
+  .Explain{
+    position: absolute;
+    top: 10px;
+    right: 150px;
+    color: #409EFF;
   }
   .block{
-    width: 60%;
+    width: 80%;
     margin-left: 30px;
   }
   .p1{
@@ -218,7 +202,7 @@ export default {
     height: 20px;
     position: absolute;
     top: 25px;
-    right: 300px;
+    left: 88%;
     margin: auto;
   }
 </style>

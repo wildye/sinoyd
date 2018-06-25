@@ -20,7 +20,10 @@
         suffix-icon="el-icon-view"
         v-model="info.password"/>
     </el-form-item>
-    <el-button type="primary" @click="sendLogin('info')">登录</el-button>
+    <el-form-item v-if="message">
+      <span>{{ message }}</span>
+    </el-form-item>
+    <el-button type="primary" @click="submitLogin('info')">登录</el-button>
   </el-form>
 </template>
 
@@ -34,6 +37,7 @@ export default {
         username: 'test',
         password: 'test'
       },
+      message: '',
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -48,24 +52,44 @@ export default {
     }
   },
   computed: {
-    toUrl: () => {
-      return this.loginRole === 'user'
-    }
   },
   methods: {
-    sendLogin (info) {
+    submitLogin (info) {
       this.$refs[info].validate((val) => {
         if (val) {
           if (this.loginRole === 'user') {
-            this.$store.commit('setIsLogin', true)
-            console.log(' submit user!')
-            this.$router.push('/')
+            this.sendlogin()
+            console.log(' user login!')
           } else {
-            console.log(' submit admin!')
+            console.log(' admin login')
           }
         } else {
           console.log('error submit!!')
           return false
+        }
+      })
+    },
+    sendlogin () {
+      this.$api.post('login', {
+        username: this.info.username,
+        password: this.info.password
+      }, result => {
+        let info = result.data
+        info.token = result.headers.authorization
+        localStorage.setItem('info', JSON.stringify(info))
+        this.$store.commit('setUserInfo', info)
+        this.$router.push('/')
+      }, error => {
+        switch (error.status) {
+          case 401:
+            this.message = '过期，请重新登录'
+            break
+          case 400:
+            this.message = '用户名或密码错误'
+            break
+          case 404:
+            this.message = '异常错误，404'
+            break
         }
       })
     }

@@ -1,8 +1,8 @@
 <template>
-  <div class="hidden-sm-and-down">
+  <div v-if="!$store.state.isWebApp">
     <router-link v-if="!$store.state.isLogin" to="/login">Login</router-link>
     <el-dropdown v-if="$store.state.isLogin">
-      <span class="el-dropdown-link">欢迎 , {{ username }}
+      <span class="el-dropdown-link">欢迎 , {{ info.userName }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -28,18 +28,18 @@ export default {
   name: 'UserInfo',
   data () {
     return {
-      isLogin: true,
-      username: '汉娜'
+      info: this.$store.state.userInfo
     }
   },
   created () {
-    // let info = this.$local.fetch('evaluate')
-    // this.$store.commit('setIsLogin', info.login)
+    console.log(this.info.userName)
   },
   methods: {
     logout: function () {
+      this.$api.delete('logout', null)
+      this.$store.commit('setUserInfo', '')
       this.$store.commit('setIsLogin', false)
-      this.$router.push('/login')
+      localStorage.setItem('info', '')
     }
   }
 }

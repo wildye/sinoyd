@@ -3,7 +3,7 @@
     <h1>
       <img src="/static/image/user-icon.svg" alt="">
     </h1>
-    <span>欢迎，汉娜</span>
+    <span>欢迎，{{ $store.state.userInfo.userName }}</span>
     <router-link to="/survey">
       <i class="el-icon-document"> 继续答卷</i>
     </router-link>
@@ -24,9 +24,15 @@ export default {
   name: 'NavSide',
   methods: {
     logout: function () {
+      this.sendLogout()
       this.$store.commit('switchSidebar')
       this.$store.commit('setIsLogin', false)
       this.$router.push('/login')
+    },
+    sendLogout: function () {
+      this.$api.delete('logout', null)
+      this.$store.commit('setToken', '')
+      localStorage.setItem('token', '')
     }
   }
 }

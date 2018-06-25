@@ -1,7 +1,7 @@
 <template>
   <div class="nav-top">
     <div class="fl">
-      <i class="el-icon-menu hidden-sm-and-up" @click="showSideBar"></i>
+      <i v-if="$store.state.isWebApp" class="el-icon-menu" @click="showSideBar"></i>
     </div>
     <h1 class="title">问卷列表</h1>
     <div class="fr">
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     showSideBar: function () {
-      this.$store.commit('switchSidebar')
+      this.$store.commit('toggleSidebar')
     }
   }
 }

@@ -7,25 +7,12 @@
 <script>
 export default {
   name: 'App',
-  data () {
-    return {
-      lists: [
-        {
-          id: 1,
-          username: 'zhenghao',
-          password: 'zhenghao'
-        },
-        {
-          id: 2,
-          username: 'liziheng',
-          password: 'liziheng'
-        },
-        {
-          id: 3,
-          username: 'yeye',
-          password: 'yeye'
-        }
-      ]
+  created () {
+    // 判断是否为移动端访问
+    if (document.documentElement.clientWidth < 480) {
+      this.$store.commit('setIsWebApp', true)
+    } else {
+      this.$store.commit('setIsWebApp', false)
     }
   }
 }

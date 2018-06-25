@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Explain">
     <el-button type="text" @click="showHint = true">说明</el-button>
     <el-dialog
       title="问卷说明"

@@ -14,7 +14,7 @@ function apiAxios (method, url, params, success, failure) {
     data: method === 'POST' || method === 'PUT' ? params : null,
     params: method === 'GET' || method === 'DELETE' ? params : null,
     baseURL: root,
-    headers: store.state.login ? { 'authorization': 'Bearer ' + store.state.token } : {},
+    headers: store.state.userInfo.token ? { 'authorization': 'Bearer ' + store.state.userInfo.token } : {},
     withCredentials: false,
     validateStatus (status) {
       return status
