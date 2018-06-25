@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://192.168.6.163:8080/', // 你接口的域名
+        target: 'http://192.168.6.163:8080/',
+        // target: 'https://easy-mock.com/mock/5b30ed91a682e4291a270142/evaluate/',
         secure: false,
         changeOrigin: false,
       }
