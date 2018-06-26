@@ -2,7 +2,7 @@
   <el-row type="flex" justify="center" align="middle">
     <el-col :span="24" :sm="14" :md="12" :lg="8">
       <h1 class="text-center">问卷调查</h1>
-      <FormLogin :loginRole = "activeName"/>
+      <FormLogin/>
     </el-col>
   </el-row>
 </template>
@@ -11,23 +11,15 @@
 import FormLogin from '../components/FormLogin'
 export default {
   name: 'login',
-  components: { FormLogin },
-  data () {
-    return {
-      activeName: 'user'
-    }
-  },
-  created () {
-
-  },
-  methods: {
+  components: {
+    FormLogin
   }
 }
 </script>
 
 <style scoped lang="less">
   body {
-    background-color: #F5F6F7;
+    background: #F5F6F7;
   }
   .el-row {
     height: 100%;
@@ -39,13 +31,8 @@ export default {
       margin: 0 15px;
     }
   }
-  .el-tabs {
-    padding: 30px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 3px 3px rgba(0,0,0,.2);
-    @media (max-width: 480px) {
-      padding: 15px;
-    }
+  h1 {
+    font-size: .36rem;
+    margin: .15rem;
   }
 </style>

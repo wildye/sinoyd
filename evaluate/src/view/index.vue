@@ -1,11 +1,11 @@
 <template>
   <Layout>
-    <span slot="header">问卷列表</span>
+    <span slot="title">问卷列表</span>
     <div slot="content" class="container">
-      <ItemCard
+      <CardList
         v-if="$store.state.isWebApp"
         :data="surveyList"/>
-      <ItemTable
+      <TableList
         v-if="!$store.state.isWebApp"
         :data="surveyList"/>
       <ul>
@@ -17,14 +17,14 @@
 
 <script>
 import Layout from '../components/Layout'
-import ItemCard from '../components/ItemCard'
-import ItemTable from '../components/ItemTable'
+import CardList from '../components/CardList'
+import TableList from '../components/TableList'
 export default {
   name: 'index',
   components: {
     Layout,
-    ItemCard,
-    ItemTable
+    CardList,
+    TableList
   },
   data () {
     return {

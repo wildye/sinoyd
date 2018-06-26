@@ -1,6 +1,8 @@
 <template>
   <Layout>
-    <span slot="header">问卷答题</span>
+    <span slot="title">问卷答题</span>
+    <!--<span slot="left">0</span>-->
+    <span slot="right"><Hint/></span>
     <div slot="content" class="container">
       <el-collapse v-model="activeName" accordion>
         <el-collapse-item title="1、团队角色自我知觉问卷 1" name="1">
@@ -14,10 +16,6 @@
             </el-slider>
           </div>
         </el-collapse-item>
-        <el-collapse-item title="2、执行力" name="2">
-          <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-          <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
-        </el-collapse-item>
       </el-collapse>
     </div>
   </Layout>
@@ -25,10 +23,12 @@
 
 <script>
 import Layout from '../components/Layout'
+import Hint from '../components/Hint'
 export default {
   name: 'index',
   components: {
-    Layout
+    Layout,
+    Hint
   },
   data () {
     return {

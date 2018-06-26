@@ -1,26 +1,28 @@
 <template>
   <el-container class="wrap">
-    <!--aside-->
+    <!-- aside 侧栏 -->
     <el-aside
       v-if="$store.state.isWebApp"
-      :class="{show: $store.state.showSidebar}">
+      :class="{ show: $store.state.showSideBar }">
       <SideBar/>
     </el-aside>
     <el-container
-      :class="{content: 1, show: $store.state.showSidebar}">
-      <!--header-->
-      <el-header height="50px">
+      :class="{ show: $store.state.showSideBar, main: 1 }">
+      <!-- nav-top 导航 -->
+      <el-header>
         <NavBar>
-          <slot slot="title" name="header"></slot>
+          <slot slot="left" name="left"></slot>
+          <slot slot="title" name="title"></slot>
+          <slot slot="right" name="right"></slot>
         </NavBar>
       </el-header>
       <el-main>
-        <!--content-->
+        <!-- content 内容 -->
         <slot name="content"></slot>
         <div
-          v-if="$store.state.showSidebar"
+          v-if="$store.state.showSideBar"
           class="shade"
-          @click="hideSideBar">
+          @click="$store.commit('toggleSideBar')">
         </div>
       </el-main>
     </el-container>
@@ -28,8 +30,8 @@
 </template>
 
 <script>
-import NavBar from '../components/NavBar'
-import SideBar from '../components/SideBar'
+import NavBar from './NavBar'
+import SideBar from './SideBar'
 export default {
   name: 'Layout',
   components: {
@@ -40,10 +42,6 @@ export default {
     this.loginDetection()
   },
   methods: {
-    // todo: 隐藏侧栏
-    hideSideBar: function () {
-      this.$store.commit('toggleSidebar')
-    },
     // todo: 登录检测
     loginDetection: function () {
       let localInfo = localStorage.getItem('info') // 获取本地数据
@@ -73,47 +71,52 @@ export default {
 
 <style lang="less">
 
-  // Page Layout
-  @offset: 50vw;
+  // Side Width
+  @sideW: 50vw;
+  // Nav Height
+  @navH: .5rem;
 
+  // 页面容器
   .wrap {
     position: relative;
     overflow: hidden;
+    height: 100%;
   }
 
-  .content {
+  // 主体内容
+  .main {
     position: absolute;
     left: 0;
+
     transition: left .5s ease 0s;
     &.show {
-      left: @offset;
+      left: @sideW;
     }
   }
+
+  // 遮罩层
   .shade {
     display: block;
     position: fixed;
-    top: 50px;
+    top: @navH;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, .2);
   }
 
-  // Element Components
+  // Element Tag
   .el-aside {
     position: absolute;
-    left: -@offset;
-    width: @offset !important;
+    left: -@sideW;
+
+    width: @sideW !important;
     height: 100%;
+
     transition: left .5s ease 0s;
-    z-index: 1;
     &.show {
       left: 0;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
     }
-  }
-
-  .el-container {
-    background: #f8f8f8;
   }
 
   .el-header {
@@ -121,8 +124,10 @@ export default {
     padding: 0;
 
     width: 100vw;
+    height: @navH !important;
 
-    line-height: 50px;
+    line-height: @navH;
+
     background: #FFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.05);
     overflow: hidden;
@@ -131,9 +136,5 @@ export default {
   .el-main {
     padding: 0;
     width: 100vw;
-  }
-
-  .el-container {
-    height: 100%;
   }
 </style>

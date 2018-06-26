@@ -1,13 +1,13 @@
 <template>
-  <div class="Explain">
-    <el-button type="text" @click="showHint = true">说明</el-button>
+  <div>
+    <span @click="showHint = true">说明</span>
     <el-dialog
       title="问卷说明"
       :width="response"
       :visible.sync="showHint"
       center>
       <p v-for="val in message" :key="val">{{ val }}</p>
-      <p><span>注意：</span>每一部分的总分必须是10分。</p>
+      <p><span class="hint">注意：</span>每一部分的总分必须是10分。</p>
     </el-dialog>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     text-indent: 25px;
     line-height: normal;
   }
-  span {
+  .hint {
     color: red;
   }
 </style>

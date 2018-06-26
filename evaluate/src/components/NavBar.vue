@@ -1,62 +1,52 @@
 <template>
-  <div class="nav-top">
+  <div class="header">
     <div class="fl">
-      <i v-if="$store.state.isWebApp" class="el-icon-menu" @click="showSideBar"></i>
-      <!--<router-link to="/Apis">Apis</router-link>-->
+      <slot name="left">
+        <i
+          v-if="$store.state.isWebApp"
+          class="el-icon-menu"
+          @click="$store.commit('toggleSideBar')">
+        </i>
+      </slot>
     </div>
     <h1>
       <slot name="title"></slot>
     </h1>
     <div class="fr">
-      <Explain/>
-      <UserInfo/>
+      <slot name="right">
+        <User/>
+      </slot>
     </div>
   </div>
 </template>
 
 <script>
-import Explain from './Explain'
-import UserInfo from './UserInfo'
+import User from './User'
 export default {
   name: 'NavTop',
   components: {
-    Explain,
-    UserInfo
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-    showSideBar: function () {
-      this.$store.commit('toggleSidebar')
-    }
+    User
   }
 }
 </script>
 
 <style scoped lang="less">
-  .nav-top {
-    font-size: 14px;
-  }
-  .el-icon-menu {
-    color: #66B1FF;
-    cursor: pointer;
-  }
-  .nav-top {
+  @main-color: #66B1FF;
+  .header {
     margin: 0 auto;
-    padding: 0 15px;
     width: 100%;
+    font-size: .20rem;
+    text-align: center;
     box-sizing: border-box;
     overflow: hidden;
-    text-align: center;
   }
-  .title {
-    display: inline-block;
+  .el-icon-menu {
+    padding: .15rem;
+    color: @main-color;
+    cursor: pointer;
   }
   h1 {
     display: inline-block;
-    margin: 0;
-    font-size: inherit;
+    font-size: .20rem;
   }
 </style>

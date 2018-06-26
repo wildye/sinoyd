@@ -7,34 +7,50 @@
 <script>
 export default {
   name: 'App',
+  data () {
+    return {
+      deviceWidth: null
+    }
+  },
   created () {
-    // 判断是否为移动端访问
-    if (document.documentElement.clientWidth < 480) {
-      this.$store.commit('setIsWebApp', true)
-    } else {
-      this.$store.commit('setIsWebApp', false)
+    this.deviceWidth = document.documentElement.clientWidth
+    this.$store.commit('setIsWebApp', this.isWebApp)
+    // 设置 body 字体, 用于 rem 布局
+    document.documentElement.style.fontSize = this.isWebApp ? this.deviceWidth / 4.8 + 'px' : 100 + 'px'
+  },
+  computed: {
+    isWebApp () {
+      return this.deviceWidth <= 480
     }
   }
 }
 </script>
 
 <style lang="less">
-  html,
-  body,
+  html, body,
   #app{
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    list-style: none;
-    overflow: auto;
   }
-  h1 {
+  body {
+    font-family: 'Microsoft YaHei', '微软雅黑', 'Helvetica';
+    background: #f8f8f8;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-size: inherit;
     font-weight: 300;
   }
+  p {
+    margin: 0;
+  }
   a {
-    color: #66B1FF;
     text-decoration: none;
+    &:hover {
+      color: inherit;
+    }
   }
   .text-center {
     text-align: center;

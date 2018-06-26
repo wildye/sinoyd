@@ -6,31 +6,30 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-    // 是否为移动端（WebApp）
-    isWebApp: false,
+    isWebApp: null,
 
     // 显示侧栏
-    showSidebar: this.isWebApp,
+    showSideBar: false,
 
-    // 是否已登录
-    isLogin: false,
+    // 登录状态
+    loginStatus: false,
 
     // 登录信息
     userInfo: {
-      id: '',
-      userName: '',
-      token: ''
+      id: null,
+      userName: null,
+      token: null
     }
   },
   mutations: {
     setIsWebApp (state, val) {
       state.isWebApp = val
     },
-    setIsLogin (state, val) {
-      state.isLogin = val
+    toggleSideBar (state) {
+      state.showSideBar = !state.showSideBar
     },
-    toggleSidebar (state) {
-      state.showSidebar = !state.showSidebar
+    setLoginStatus (state, val) {
+      state.loginStatus = val
     },
     setUserInfo (state, val) {
       state.userInfo = val
