@@ -23,7 +23,7 @@
     <el-form-item v-if="message">
       <span>{{ message }}</span>
     </el-form-item>
-    <el-button type="primary" @click="submitLogin('info')">登录</el-button>
+    <el-button type="primary" @click="submitLogin">登录</el-button>
   </el-form>
 </template>
 
@@ -54,22 +54,7 @@ export default {
   computed: {
   },
   methods: {
-    submitLogin (info) {
-      this.$refs[info].validate((val) => {
-        if (val) {
-          if (this.loginRole === 'user') {
-            this.sendlogin()
-            console.log(' user login!')
-          } else {
-            console.log(' admin login')
-          }
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    sendlogin () {
+    submitLogin () {
       this.$api.post('login', {
         username: this.info.username,
         password: this.info.password
@@ -98,7 +83,16 @@ export default {
 </script>
 
 <style scoped>
-.el-button {
-  width: 100%;
-}
+  .el-form {
+    padding: 30px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px rgba(0,0,0,.2);
+    @media (max-width: 480px) {
+      padding: 15px;
+    }
+  }
+  .el-button {
+    width: 100%;
+  }
 </style>

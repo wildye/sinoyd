@@ -27,7 +27,7 @@ export default {
     height: 100%;
     width: 100%;
     list-style: none;
-    overflow: hidden;
+    overflow: auto;
   }
   h1 {
     font-weight: 300;

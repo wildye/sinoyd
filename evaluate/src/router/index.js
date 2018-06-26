@@ -14,8 +14,8 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      alias: '/index',
+      path: '/survey',
+      alias: '/',
       component: home
     },
     {
@@ -24,7 +24,7 @@ export default new Router({
     },
     {
       // 问卷列表
-      path: '/survey',
+      path: '/survey/:id',
       component: survey
     },
     {
@@ -46,7 +46,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: '/survey'
     }
   ]
 })

@@ -128,7 +128,7 @@ export default {
     },
     // todo: 提交问卷
     submitSrvey () {
-      let urlstr = this.strUrl[0].substr(10)
+      let urlstr = this.strUrl[0].substr(7)
       this.$api.post('survey', {
         'staff': {
           'name': 'test',
@@ -142,12 +142,12 @@ export default {
               {
                 'id': 1,
                 'code': 'PL',
-                'score': 3
+                'score': 5
               },
               {
                 'id': 2,
                 'code': 'RI',
-                'score': 3
+                'score': 5
               }
             ]
           },
@@ -157,12 +157,12 @@ export default {
               {
                 'id': 1,
                 'code': 'PL',
-                'score': 3
+                'score': 5
               },
               {
                 'id': 2,
                 'code': 'RI',
-                'score': 3
+                'score': 5
               }
             ]
           }

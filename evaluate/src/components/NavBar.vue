@@ -2,8 +2,11 @@
   <div class="nav-top">
     <div class="fl">
       <i v-if="$store.state.isWebApp" class="el-icon-menu" @click="showSideBar"></i>
+      <!--<router-link to="/Apis">Apis</router-link>-->
     </div>
-    <h1 class="title">问卷列表</h1>
+    <h1>
+      <slot name="title"></slot>
+    </h1>
     <div class="fr">
       <Explain/>
       <UserInfo/>
@@ -33,6 +36,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+  .nav-top {
+    font-size: 14px;
+  }
   .el-icon-menu {
     color: #66B1FF;
     cursor: pointer;
@@ -47,9 +53,10 @@ export default {
   }
   .title {
     display: inline-block;
-    font-size: 14px;
   }
   h1 {
+    display: inline-block;
     margin: 0;
+    font-size: inherit;
   }
 </style>

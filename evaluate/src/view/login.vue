@@ -2,23 +2,16 @@
   <el-row type="flex" justify="center" align="middle">
     <el-col :span="24" :sm="14" :md="12" :lg="8">
       <h1 class="text-center">问卷调查</h1>
-      <el-tabs v-model="activeName" stretch>
-        <el-tab-pane label="员工登录" name="user">
-          <LoginForm :loginRole = "activeName"/>
-        </el-tab-pane>
-        <el-tab-pane label="管理登录" name="admin">
-          <LoginForm :loginRole = "activeName"/>
-        </el-tab-pane>
-      </el-tabs>
+      <FormLogin :loginRole = "activeName"/>
     </el-col>
   </el-row>
 </template>
 
 <script>
-import LoginForm from '../components/LoginForm'
+import FormLogin from '../components/FormLogin'
 export default {
   name: 'login',
-  components: { LoginForm },
+  components: { FormLogin },
   data () {
     return {
       activeName: 'user'

@@ -10,7 +10,7 @@
           <router-link to="/survey">继续答卷</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
-          <router-link to="/survey">问卷列表</router-link>
+          <router-link to="/">问卷列表</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <router-link to="/port">Api Test</router-link>
@@ -30,9 +30,6 @@ export default {
     return {
       info: this.$store.state.userInfo
     }
-  },
-  created () {
-    console.log(this.info.userName)
   },
   methods: {
     logout: function () {

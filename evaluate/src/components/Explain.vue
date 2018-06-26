@@ -27,10 +27,10 @@ export default {
   computed: {
     response: () => {
       let deviceWidth = document.documentElement.clientWidth
-      if (deviceWidth >= 992) return '30%'
-      else if (deviceWidth >= 768) return '50%'
-      else if (deviceWidth >= 480) return '80%'
-      return '94%'
+      if (deviceWidth >= 992) return '50%'
+      else if (deviceWidth >= 768) return '80%'
+      else if (deviceWidth >= 480) return '90%'
+      return '92%'
     }
   }
 }

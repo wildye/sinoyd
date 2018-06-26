@@ -1,5 +1,6 @@
 <template>
   <el-container class="wrap">
+    <!--aside-->
     <el-aside
       v-if="$store.state.isWebApp"
       :class="{show: $store.state.showSidebar}">
@@ -7,13 +8,15 @@
     </el-aside>
     <el-container
       :class="{content: 1, show: $store.state.showSidebar}">
+      <!--header-->
       <el-header height="50px">
-        <NavBar/>
+        <NavBar>
+          <slot slot="title" name="header"></slot>
+        </NavBar>
       </el-header>
       <el-main>
-        <div class="container">
-          <slot></slot>
-        </div>
+        <!--content-->
+        <slot name="content"></slot>
         <div
           v-if="$store.state.showSidebar"
           class="shade"
@@ -86,15 +89,6 @@ export default {
       left: @offset;
     }
   }
-
-  .container {
-    width: 100%;
-    @media (min-width: 960px) {
-      margin: 0 auto;
-      width: 960px;
-    }
-  }
-
   .shade {
     display: block;
     position: fixed;
@@ -110,9 +104,8 @@ export default {
     left: -@offset;
     width: @offset !important;
     height: 100%;
-    background: #66B1FF;
-    z-index: 1;
     transition: left .5s ease 0s;
+    z-index: 1;
     &.show {
       left: 0;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
@@ -120,7 +113,7 @@ export default {
   }
 
   .el-container {
-    background-color: #F5F6F7;
+    background: #f8f8f8;
   }
 
   .el-header {
@@ -128,7 +121,6 @@ export default {
     padding: 0;
 
     width: 100vw;
-    height: 50px !important;
 
     line-height: 50px;
     background: #FFF;
@@ -143,12 +135,5 @@ export default {
 
   .el-container {
     height: 100%;
-  }
-
-  .el-card {
-    margin: 0 10px 10px;
-  }
-  span {
-    color: #000;
   }
 </style>
