@@ -1,6 +1,7 @@
 <template>
   <Layout>
     <span slot="title">问卷列表</span>
+    <span slot="right">Menu</span>
     <div slot="content" class="container">
       <CardList
         v-if="$store.state.isWebApp"
@@ -10,7 +11,7 @@
         :data="surveyList"
         @toTable = "submitUrlNum"/>
       <ul>
-        <li v-for="val in urlStr" :key="val.id">{{val}}</li>
+        <li v-for="val in 50" :key="val.id">{{val}}</li>
       </ul>
     </div>
   </Layout>

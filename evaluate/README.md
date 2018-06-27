@@ -3,26 +3,21 @@
 ## 配置 src 目录
 ```
 ├── App.vue                  // APP入口文件
-├── api                      // 接口调用工具文件夹
-│   └── index.js                // 接口调用工具
-├── components               // 组件文件夹，目前为空
-├── config                   // 项目配置文件夹
-│   └── index.js                // 项目配置文件
-├── main.js                  // 项目配置文件
-├── page                     // 我们的页面组件文件夹
-│   └── index.vue
+├── api                      // 接口调用工具
+│   └── index.js
+├── components               // 组件
+├── store                    // 状态管理
+│   └── index.js
+
 ├── router                   // 路由配置文件夹
 │   └── index.js                // 路由配置文件
-└── style                    // scss 样式存放目录
-    ├── base                    // 基础样式存放目录
-    │   ├── _base.less              // 基础样式文件
-    │   ├── _color.less             // 项目颜色配置变量文件
-    │   ├── _mixin.less             // scss 混入文件
-    │   └── _reset.less             // 浏览器初始化文件
-    ├── less                    // 页面样式文件夹
-    │   ├── _content.less           // 内容页面样式文件
-    │   └── _index.less             // 列表样式文件
-    └── style.less                  // 主样式文件
+├── view                     // 页面
+│   ├── index.vue                // 问卷列表页、主页
+│   ├── login.vue                // 登录页
+│   ├── summary.vue              // 问卷汇总页
+│   └── survey.vue               // 问卷答卷页
+├── App.vue                  // APP入口文件
+└── main.js                  // 项目配置文件
 ```
 
 ## 配置 static 目录
