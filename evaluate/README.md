@@ -2,20 +2,30 @@
 
 ## 配置 src 目录
 ```
-├── App.vue                  // APP入口文件
-├── api                      // 接口调用工具
+│
+├── api                      // 接口调用
 │   └── index.js
-├── components               // 组件
 ├── store                    // 状态管理
 │   └── index.js
-
-├── router                   // 路由配置文件夹
-│   └── index.js                // 路由配置文件
+├── router                   // 路由配置
+│   └── index.js
+├── components               // 组件
+│   ├── AdminSideBar.vue        // 汇总页侧栏
+│   ├── Api.vue                 // 接口测试
+│   ├── CardList.vue            // 卡片列表
+│   ├── FormLogin.vue           // 登陆表单
+│   ├── FormStaff.vue           // 员工表单
+│   ├── Hint.vue                // 问卷说明
+│   ├── Layout.vue              // 布局
+│   ├── NavBar.vue              // 导航栏
+│   ├── SideBar.vue             // 滑动侧边栏
+│   ├── TableList.vue           // 表格列表
+│   └── User.vue                // 用户信息
 ├── view                     // 页面
-│   ├── index.vue                // 问卷列表页、主页
-│   ├── login.vue                // 登录页
-│   ├── summary.vue              // 问卷汇总页
-│   └── survey.vue               // 问卷答卷页
+│   ├── index.vue               // 问卷列表页、主页
+│   ├── login.vue               // 登录页
+│   ├── summary.vue             // 问卷汇总页
+│   └── survey.vue              // 问卷答卷页
 ├── App.vue                  // APP入口文件
 └── main.js                  // 项目配置文件
 ```
