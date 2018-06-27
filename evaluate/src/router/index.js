@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // view
-import home from '@/view/'
+import index from '@/view/'
 import login from '../view/login'
 import survey from '../view/survey'
 import summary from '../view/summary'
@@ -14,18 +14,13 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/survey',
-      alias: '/',
-      component: home
+      path: '/',
+      alias: '/survey',
+      component: index
     },
     {
       path: '/login',
       component: login
-    },
-    {
-      // 问卷列表
-      path: '/survey/:id',
-      component: survey
     },
     {
       // 答卷页面
@@ -38,10 +33,6 @@ export default new Router({
     },
     {
       path: '/port',
-      component: apis
-    },
-    {
-      path: '/Apis',
       component: apis
     },
     {

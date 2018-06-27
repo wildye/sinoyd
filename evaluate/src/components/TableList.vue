@@ -33,9 +33,9 @@
         prop=""
         label="操作">
         <template slot-scope="scope">
-          <router-link v-if="!$store.state.isLogin" to="/survey/as">开始答卷</router-link>
-          <el-button v-if="$store.state.isLogin" type="text" @click="submitUrlNum">生成问卷</el-button>
-          <router-link v-if="$store.state.isLogin" to="/summary">查看汇总</router-link>
+          <router-link class="keep" v-if="!$store.state.loginStatus" to="/survey/answer">开始答卷</router-link>
+          <el-button class="keep" v-if="$store.state.loginStatus" type="text" @click="alertInput">生成问卷</el-button>
+          <router-link class="keep" v-if="$store.state.loginStatus" to="/summary">查看汇总</router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -44,10 +44,17 @@
 <script>
 export default {
   name: 'surveyTable',
-  props: ['data']
+  props: ['data'],
+  methods: {
+    alertInput () {
+      this.$emit('toTable')
+    }
+  }
 }
 </script>
 
 <style scoped>
-
+  .keep {
+    word-break: keep-all;
+  }
 </style>

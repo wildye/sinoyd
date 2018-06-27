@@ -35,7 +35,7 @@ export default {
   .header {
     margin: 0 auto;
     width: 100%;
-    font-size: .20rem;
+    font-size: .14rem;
     text-align: center;
     box-sizing: border-box;
     overflow: hidden;
@@ -47,6 +47,6 @@ export default {
   }
   h1 {
     display: inline-block;
-    font-size: .20rem;
+    font-size: .14rem;
   }
 </style>

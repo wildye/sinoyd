@@ -19,7 +19,11 @@ export default new Vuex.Store({
       id: null,
       userName: null,
       token: null
-    }
+    },
+
+    // url 已生成随机串
+    urlStr: [],
+    urlStrIndex: 0
   },
   mutations: {
     setIsWebApp (state, val) {
@@ -36,6 +40,18 @@ export default new Vuex.Store({
     },
     setToken (state, val) {
       state.userInfo.token = val
+    },
+    getUrlStr (state) {
+      state.urlStrIndex++
+    },
+    addUrlStr (state, val) {
+      state.urlStr = state.urlStr.concat(val)
+    },
+    delUrlStr (state, val) {
+      let index = state.urlStr.indexOf(val)
+      if (index >= 0) {
+        state.urlStr.splice(index, 1)
+      }
     }
   }
 })

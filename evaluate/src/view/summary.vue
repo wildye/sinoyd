@@ -1,125 +1,298 @@
 <template>
-  <div class="admin">
-    <div class="admin-top">
-      <img class="imgOne" src="../../static/image/logo.svg"/>
-      <span class="spn1">后台管理信息页面</span>
-      <span class="spn3">管理员：{{name}}</span>
-      <Explain/>
+  <Layout>
+    <!-- header -->
+    <div slot="title">聚合分数汇总</div>
+    <div slot="left">
+      <router-link to="/" class="el-icon-back"></router-link>
     </div>
-    <div class="admin-main">
-      <el-table
-      :data="tableData"
-      style="width: 100%">
-        <el-table-column
-          label="日期"
-          width="180">
-          <template slot-scope="scope">
-            <i class="el-icon-time"></i>
-            <span style="margin-left: 10px">{{ scope.row.date }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="姓名"
-          width="180">
-          <template slot-scope="scope">
-            <el-popover>
-              <div slot="reference" class="name-wrapper">
-                <el-tag size="medium">{{ scope.row.name }}</el-tag>
-              </div>
-            </el-popover>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+    <div slot="right"></div>
+
+    <!-- content -->
+    <div slot="content" class="container">
+      <el-row :gutter="10">
+
+        <!-- Menu -->
+        <el-col :span="24" :sm="4">
+          <AdminSideBar/>
+        </el-col>
+
+        <!-- 表格内容构建汇总内容 -->
+        <el-col :span="24" :sm="20">
+          <el-table
+            :data="tableData6"
+            border
+            style="width: 100%"
+            :row-class-name="tableRowClassName">
+            <!--id-->
+            <el-table-column
+              prop="id"
+              label="ID"
+              width="50">
+            </el-table-column>
+            <!--姓名-->
+            <el-table-column
+              prop="name"
+              label="姓名"
+              width="80">
+            </el-table-column>
+            <!--性别-->
+            <el-table-column
+              prop="sex"
+              label="性别"
+              width="50">
+            </el-table-column>
+            <!--  智多星  -->
+            <el-table-column
+              label="PL"
+              width="80">
+              <el-table-column
+                prop="PL"
+                label="智多星"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  外联者  -->
+            <el-table-column
+              label="RI"
+              width="80">
+              <el-table-column
+                prop="RI"
+                label="外联者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  协调者  -->
+            <el-table-column
+              label="CO"
+              width="80">
+              <el-table-column
+                prop="CO"
+                label="协调者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  鞭策者  -->
+            <el-table-column
+              label="SH"
+              width="80">
+              <el-table-column
+                prop="SH"
+                label="鞭策者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  监督者  -->
+            <el-table-column
+              label="ME"
+              width="80">
+              <el-table-column
+                prop="ME"
+                label="监督者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  凝聚者-->
+            <el-table-column
+              label="TW"
+              width="80">
+              <el-table-column
+                prop="TW"
+                label="凝聚者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  实干者-->
+            <el-table-column
+              label="IM"
+              width="80">
+              <el-table-column
+                prop="IM"
+                label="实干者"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  善始善终者  -->
+            <el-table-column
+              label="CF"
+              width="80">
+              <el-table-column
+                prop="CF"
+                label="善始善终"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  专家  -->
+            <el-table-column
+              label="SP"
+              width="80">
+              <el-table-column
+                prop="SP"
+                label="专家"
+                width="80">
+              </el-table-column>
+            </el-table-column>
+            <!--  最终结论  -->
+            <el-table-column
+              prop="end"
+              label="最终结论">
+            </el-table-column>
+            <!--  个人详细信息  -->
+            <el-table-column
+              prop="change"
+              label="个人详细信息">
+            </el-table-column>
+          </el-table>
+        </el-col>
+      </el-row>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script>
+import Layout from '../components/Layout'
+import AdminSideBar from '../components/AdminSideBar'
 export default {
-  name: 'login',
+  name: 'Summary',
+  components: {
+    Layout,
+    AdminSideBar
+  },
+  created () {
+    this.getSummary()
+  },
   data () {
     return {
-      name: 'test',
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      Aggregate: {},
+      tableData6: [
+        {
+          id: '1',
+          name: '欧阳靖羽',
+          sex: '女',
+          PL: '89',
+          RI: '48',
+          CO: '98',
+          SH: '90',
+          ME: '65',
+          TW: '80',
+          IM: '90',
+          CF: '98',
+          SP: '87',
+          end: '协调者，善始善终者',
+          change: '点击查看'
+        },
+        {
+          id: '2',
+          name: '李子恒',
+          sex: '男',
+          PL: '95',
+          RI: '98',
+          CO: '98',
+          SH: '80',
+          ME: '65',
+          TW: '86',
+          IM: '90',
+          CF: '98',
+          SP: '90',
+          end: '协调者，善始善终者，智多星',
+          change: '点击查看'
+        },
+        {
+          id: '3',
+          name: '郑豪',
+          sex: '男',
+          PL: '95',
+          RI: '98',
+          CO: '98',
+          SH: '80',
+          ME: '65',
+          TW: '86',
+          IM: '90',
+          CF: '98',
+          SP: '90',
+          end: '协调者，善始善终者，智多星',
+          change: '点击查看'
+        },
+        {
+          id: '4',
+          name: '叶野',
+          sex: '男',
+          PL: '95',
+          RI: '98',
+          CO: '98',
+          SH: '80',
+          ME: '65',
+          TW: '86',
+          IM: '90',
+          CF: '98',
+          SP: '90',
+          end: '协调者，善始善终者，智多星',
+          change: '点击查看'
+        }
+      ]
     }
   },
   methods: {
-    handleEdit (index, row) {
-      console.log(index, row)
+    // todo: 获取聚合分数(需登录)
+    getSummary () {
+      this.$api.get('survey/summary', null, result => {
+        console.log(result.data)
+      })
     },
-    handleDelete (index, row) {
-      console.log(index, row)
+    tableRowClassName ({row, rowIndex}) {
+      if (rowIndex === 1) {
+        return 'warning-row'
+      } else if (rowIndex === 3) {
+        return 'success-row'
+      }
+      return ''
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-  @login-bc: #81BFCB;
-  @answer-bc: #D7D7D7;
-  @answer-tc: #F2F2F2;
-.admin{
-  height: 100%;
-  width: 100%;
-  .admin-top{
-    width: 80%;
-    height: 50px;
-    background-color:white;
-    margin: 0 auto;
-    position: relative;
-    box-shadow: 0px 2px 2px #888888;
-    margin-bottom: 2px;
-    .spn1{
-      font-weight: 600;
-      float: left;
-      color: @login-bc;
-      line-height: 50px;
-      font-size: 25px;
-      width: 270px;
-      height: 100%;
-      display: block;
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: auto;
-    }
-    .imgOne{
-      width: 80px;
-      height: 40px;
-      margin-top: 5px;
-      margin-left: 150px;
-      float: left;
-    }
-    .spn3{
-      position: absolute;
-      right: 20px;
-      margin: auto;
-      line-height: 50px;
-      color: #81BFCB;
+
+  .container {
+    width: 100%;
+    padding: 10px 10px 0;
+    box-shadow: 0 3px 3px rgba(0,0,0,.05);
+    box-sizing: border-box;
+    @media (min-width: 480px) {
+      margin: 0 auto;
+      min-width: 480px;
     }
   }
-  .admin-main{
-    width: 80%;
-    height: 500px;;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-}
+  /*.el-header, .el-footer {*/
+    /*background-color: #fff;*/
+    /*color: #000;*/
+    /*text-align: center;*/
+    /*line-height: 50px;*/
+    /*font-size: 20px;*/
+    /*font-weight: bold;*/
+  /*}*/
+  /*.nin{*/
+    /*background-color: #F5F6F7;*/
+    /*width: 100%;*/
+  /*}*/
+  /*.box{*/
+    /*width: 1200px;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 30px;*/
+    /*margin-bottom: 30px;*/
+    /*text-align: center;*/
+  /*}*/
+  /*.nav{*/
+    /*text-align: center;*/
+  /*}*/
+  /*.el-container{*/
+    /*height: 100%;*/
+  /*}*/
+
+  /*.el-table .warning-row {*/
+    /*background: oldlace;*/
+  /*}*/
+
+  /*.el-table .success-row {*/
+    /*background: #f0f9eb;*/
+  /*}*/
 </style>

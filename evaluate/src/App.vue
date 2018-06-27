@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ show: $store.state.showSideBar }">
     <router-view/>
   </div>
 </template>
@@ -37,10 +37,14 @@ export default {
   body {
     font-family: 'Microsoft YaHei', '微软雅黑', 'Helvetica';
     background: #f8f8f8;
+    font-size: .12rem;
+    overflow-x: hidden;
+  }
+  #app.show {
+    overflow: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-size: inherit;
     font-weight: 300;
   }
   p {
@@ -60,5 +64,9 @@ export default {
   }
   .fr {
     float: right;
+  }
+  .v-modal,
+  .el-slider__button-wrapper {
+    z-index: auto !important;
   }
 </style>

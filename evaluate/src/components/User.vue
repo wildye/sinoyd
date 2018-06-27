@@ -1,8 +1,8 @@
 <template>
   <div v-if="!$store.state.isWebApp">
-    <router-link v-if="!$store.state.isLogin" to="/login">Login</router-link>
-    <el-dropdown v-if="$store.state.isLogin">
-      <span class="el-dropdown-link">欢迎 , {{ info.userName }}
+    <router-link v-if="!$store.state.loginStatus" to="/login">登录</router-link>
+    <el-dropdown v-if="$store.state.loginStatus">
+      <span class="el-dropdown-link">欢迎 , {{ this.$store.state.userInfo.userName }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -26,16 +26,11 @@
 <script>
 export default {
   name: 'UserInfo',
-  data () {
-    return {
-      info: this.$store.state.userInfo
-    }
-  },
   methods: {
     logout: function () {
       this.$api.delete('logout', null)
       this.$store.commit('setUserInfo', '')
-      this.$store.commit('setIsLogin', false)
+      this.$store.commit('setLoginStatus', false)
       localStorage.setItem('info', '')
     }
   }
@@ -46,8 +41,6 @@ export default {
   div {
     display: inline-block;
     font-size: 14px;
-  }
-  .el-dropdown {
-    line-height: normal;
+    padding: 0 .15rem;
   }
 </style>

@@ -11,9 +11,13 @@
       <div class="text item">发布于: {{val.created_at}}</div>
       <div class="text item">最近更新: {{val.updated_at}}</div>
       <div class="text item footer">
-        <el-button v-if="!$store.state.isLogin" size="small">开始答卷</el-button>
-        <el-button v-if="$store.state.isLogin" size="small">生成问卷</el-button>
-        <el-button v-if="$store.state.isLogin" size="small">问卷汇总</el-button>
+        <el-button v-if="!$store.state.loginStatus" size="small">
+          <router-link to="/survey/answer">开始答卷</router-link>
+        </el-button>
+        <el-button v-if="$store.state.loginStatus" size="small">生成问卷</el-button>
+        <el-button v-if="$store.state.loginStatus" size="small">
+          <router-link to="/summary">查看汇总</router-link>
+        </el-button>
       </div>
     </el-card>
   </div>
@@ -27,5 +31,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .el-card {
+    margin-top: 10px;
+  }
 </style>

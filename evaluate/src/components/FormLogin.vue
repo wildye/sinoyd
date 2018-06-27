@@ -23,7 +23,7 @@
     <el-form-item v-if="message">
       <span>{{ message }}</span>
     </el-form-item>
-    <el-button type="primary" @click="submitLogin">登录</el-button>
+    <el-button type="primary" @click="submitForm('info')">登录</el-button>
   </el-form>
 </template>
 
@@ -54,15 +54,30 @@ export default {
   computed: {
   },
   methods: {
-    submitLogin () {
+
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.sendLogin()
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    },
+    sendLogin () {
       this.$api.post('login', {
         username: this.info.username,
         password: this.info.password
       }, result => {
         let info = result.data
         info.token = result.headers.authorization
-        localStorage.setItem('info', JSON.stringify(info))
         this.$store.commit('setUserInfo', info)
+        this.$store.commit('setLoginStatus', true)
+        localStorage.setItem('info', JSON.stringify(info))
         this.$router.push('/')
       }, error => {
         switch (error.status) {
