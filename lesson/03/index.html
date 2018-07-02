@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="static/css/master.css">
+  <link rel="stylesheet" href="static/css/pageSlide.css">
+  <!--[if lte IE 8]>
+  <script src="static/js/PIE/PIE.js"></script>
+  <![endif]-->
 </head>
 <body>
-
 <div data-PageSlide>
   <div class="items">
     <div class="item item1"></div>
@@ -16,31 +18,32 @@
   </div>
   <div class="pages"></div>
 </div>
-
 <script src="static/js/jquery-1.12.4.js"></script>
 <script src="static/js/jquery.pageSlide.js"></script>
 
 <script>
-(function ($) {
+  (function ($) {
+    // 实例化插件
+    $('[data-PageSlide]').PageSlide({
+      selector: {
+        items: ".items", // 容器
+        item: ".item",   // 子项
+        pages: ".pages"  // 分页
+      },
 
-  $('[data-PageSlide]').PageSlide({
-    index: 1,
-    control: {
+      index: 0,          // 索引
+
+      loop: true,        // 启用循环切换
+      interval: 1500,    // 切换间隔
+      speed: 800,        // 过渡时间
+
       pages: true,       // 启用分页
       pagesArrows: true, // 分页箭头控制
       pagesDot: true,    // 分页点控制
-      keyboard: true     // 启用键盘控制
-    },
-    animation: {
-      loop: false,       // 启用循环动画
-      interval: 1500,    // 循环间隔
-      speed: 800         // 动画时间
-    }
-  });
-
-})(jQuery);
-
+      keyboard: true,    // 启用键盘控制
+      mouseRoll: true    // 启用鼠标滚轮控制
+    });
+  })(jQuery);
 </script>
-
 </body>
 </html>

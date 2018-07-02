@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="static/css/range-picker.min.css">
+  <link rel="stylesheet" href="static/css/jquery.range.css">
   <link rel="stylesheet" href="static/css/master.css">
 </head>
 <body>
 <div class="container">
   <div class="crumb">
-    <div class="head">筛选：</div>
+    <div class="head">分类 ></div>
     <div class="keys"></div>
     <div class="foot">
       <a class="btn toggle">隐藏分类</a>
@@ -33,7 +33,9 @@
     </div>
     <div class="row">
       <div class="head">价格：</div>
-      <div class="body"></div>
+      <div class="body price">
+        <input type="hidden" class="range-slider" value="12,64" />
+      </div>
       <div class="foot">
         <span>更多</span>
       </div>
@@ -42,9 +44,228 @@
   <form></form>
 </div>
 <script src="../lib/jquery-1.12.4.js"></script>
-<script src="static/js/range_picker.min.js"></script>
-<script src="static/js/main.js"></script>
+<script src="static/js/jquery.range.js"></script>
 <script>
+  (function($) {
+
+    // 缓存 DOM
+    let items = $(".body"),
+        item1 = items.eq(0),
+        item2 = items.eq(1),
+        item3 = items.eq(2).children(".range-slider"),
+        selectEl = $(".keys");
+
+    let selectUrl = getUrlParse();
+    let once = true;
+
+    // 已选
+    let select = [
+      selectUrl.brand ? selectUrl.brand : [], 
+      selectUrl.yieldly ? selectUrl.yieldly : [], 
+      selectUrl.price ? selectUrl.price : []
+    ];
+
+    // 将json数据渲染生成标签
+    (function(path){
+      readJson(path, data => {
+
+        // 获取分类数据
+        let classify = {
+          brand: readClassify("brand", data),
+          yieldly: readClassify("yieldly", data),
+          price: readClassify("price", data).map(val => parseInt(val))
+        };
+
+        // 生成标签, 渲染数据
+        item1.append(createElem(classify.brand, "span"));
+        item2.append(createElem(classify.yieldly, "span"));
+
+        // 实例化范围控件, 填充价格数据
+        item3.jRange({
+          from: classify.price[0],
+          to: classify.price[classify.price.length - 1],
+          step: 1,
+          scale: classify.price,
+          format: '%s',
+          width: "100%",
+          showLabels: false,
+          isRange : true
+        });
+
+        // 初始渲染数据
+        render();
+
+        // 绑定标签事件
+        items.on("click", "span", function() {
+          let self = $(this);
+          let index = self.closest(".row").index();
+          select[index].push(self.addClass("active").text())
+          render()
+
+          // 绑定一次性事件，避免冒泡
+          self.one("click", function(e) {
+            e.stopPropagation()
+            let me = $(this)
+            me.removeClass("active");
+            select[index].splice(select[index].indexOf(me.text()), 1)
+            render()
+          })
+
+        })
+
+      })
+    })('./goods.json')
+
+    // http://127.0.0.1:3000/04/?brand=百草园&brand=三味书屋&yieldly=香格里拉&yieldly=云南大理
+
+    // 渲染DOM 
+    function render () {
+      let one = item1.children("span");
+      let two = item2.children("span");
+      const rd1 = select[0].length === 0 ? '' : "<span>品牌: " + uniq(select[0]).sort().join(", ") + "</span>";
+      const rd2 = select[1].length === 0 ? '' : "<span>产地: " + uniq(select[1]).sort().join(", ") + "</span>";
+
+      selectEl.html(rd1 + rd2)
+
+      if (once) {
+        once = false;
+        let els = [item1.children("span"), item1.children("span")];
+
+        for (let i in els) {
+          for (let val of select[i]) {
+            console.log(val);
+            for (let key = 0; key < els[i].length; key++) {
+              if (val === els[i].eq(key).text()) {
+                els[i].eq(key).addClass("active");
+                els[i].eq(key).one("click", function(e) {
+                  e.stopPropagation()
+                  let me = $(this)
+                  me.removeClass("active");
+                  select[i].splice(select[i].indexOf(me.text()), 1);
+                })
+              }
+            }
+          }
+          render();
+        }
+        
+      }      
+    }
+
+    // 读取 json 文件
+    function readJson (filePath, callback) {
+      let promise = new Promise(function(success, failure) {
+        $.get(filePath, function(result) {
+          success(result);
+        }, "json");
+      });
+
+      promise.then(function(result) {
+        callback(result)
+      }, function (error) {
+        console.log(error)
+      })
+    }
+
+    // 解析url参数
+    function getUrlParse () {
+      
+      let p = location.search ? decodeURI(location.search) : false;
+      if (!p) return [];
+
+      if (p) {
+        let obj = {};
+        let arr = p.substr(1).split("&").map(function(val) {
+          return val.split("=")
+        });
+        arr.map(function(val) {
+          if (!obj[val[0]]) {
+            obj[val[0]] = [];
+          }
+          if (val[1]) {
+            obj[val[0]].push(val[1]);
+          }
+        })
+        if (obj.price && obj.price.length >= 2) {
+          obj.price.sort(function(a, b) {
+            return a - b;
+          })
+        }
+        return obj ? obj : [];
+      }
+      console.warn('no found  parse');
+    }
+
+    // 读取数据分类
+    function readClassify (field, data) {
+      return uniq(data.map(function (val) {
+        return val[field]
+      }));
+    }
+
+    // 元素标签批量生成
+    function createElem (data, label) {
+      return data.reduce(function(val, newVal) {
+        return val + "<" + label + ">" + newVal + "</" + label + ">";
+      }, "")
+    }
+
+    // 数组去重
+    function uniq(arr) {
+      let me = arr, 
+          len = me.length,
+          newArr = [];
+      for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+          if (me[i] === me[j]) j = ++i;
+        }
+        newArr.push(me[i]);
+      }
+      return newArr;
+    }
+
+    // 溢出隐藏
+    // (function(){
+    //   let span = $(".row .foot span");
+
+    //   for (let i = 0; i < span.length; i++) {
+    //     let me = $(span[i]);
+    //     let boxH = me.closest(".row").height();
+    //     boxH == 40 ? me.remove() : me.text("收起");
+    //   }
+
+    //   $(".row .foot span").on("click", function() {
+    //     let me = $(this),
+    //       box = me.closest(".row");
+
+    //     if (box.height() > 40) {
+    //       me.text("更多");
+    //       box.css("max-height", "40px");
+    //     } else {
+    //       me.text("收起");
+    //       box.css("max-height", "none");
+    //     }
+    //   });
+
+    // })();
+
+    // 提交表单
+    // (function(){
+    //   $(".btn.submit").on("click", function () {
+    //     $("form").attr("action", "#" + crumb.uniq().join("&") + "&price=" + $('.range-slider').val()).submit();
+    //   });
+    // })();
+
+    // // 显示隐藏分类
+    // (function(){
+    //   $(".btn.toggle").on("click", function () {
+    //     let box = $(".group");
+    //     $(this).text(box.css("display") === "block" ? "显示分类" : "隐藏分类");
+    //     box.slideToggle();
+    //   });
+    // })();
+  
+  })(jQuery)
 </script>
 </body>
 </html>

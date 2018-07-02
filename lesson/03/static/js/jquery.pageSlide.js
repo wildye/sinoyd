@@ -1,19 +1,19 @@
 ;(function ($) {
-  "use strict";
+  "use strict"; // 严格模式
 
   // 构造函数
   var PageSlide = (function () {
 
-    function PageSlide(element, options) {
+    function PageSlide (element, options) {
 
-      // 选择器返回的DOM元素
+      // this 指向选择器返回的 DOM 元素集
       this.element = element;
-
       // 合并配置参数
       this.settings = $.extend({}, $.fn.PageSlide.defaults, options || {});
 
+      console.log(this.settings);
+      // 执行初始化方法
       this.init();
-
     }
 
     // 将插件常用方法包装到对象上
@@ -21,35 +21,32 @@
 
       // todo: 初始化页面布局及事件绑定
       init: function () {
-        var me = this;
+        var me = this,               // this 多次调用，缓存起来
+            userAgent = navigator.userAgent;
 
-        me.index = (me.settings.index >= 0 && me.settings.index < me.pageCount) ? me.settings.index : 0;
+        // 获取 DOM 元素
+        me.selector = me.settings.selector;
+        me.items = me.element.find(me.selector.items);  // 容器
+        me.item = me.items.find(me.selector.item);      // 子项
+        me.pages = me.element.find(me.selector.pages);  // 分页
+
+        // 获取索引
+        me.index = (me.settings.index >= 0 && me.settings.index < me.pageCount()) ? me.settings.index : 0;
+        // 获取浏览器信息
 
 
-        me.selectors = me.settings.selectors;
-        me.control   = me.settings.control;
-        me.animation = me.settings.animation;
+        if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) {
+          me.isIE8 = navigator.userAgent.toLowerCase().match(/msie ([\d.]+)/)[1] == "8.0" ? true : false;
+        }
 
-        // 获取 dom 元素
-        me.items  = me.element.find(me.selectors.items);
-        me.item   = me.items.find(me.selectors.item);
-        me.pages  = me.element.find(me.selectors.page);
 
-        // 初始化布局
-        me._initLayout();
-
-        // 初始化分页
-        me._initPages();
-
-        // 初始化事件绑定
-        me._initEvent();
-
-        // 自动切换
-        me._autoSwitch();
+        me._initLayout(); // 页面布局
+        me._initEvent();  // 事件绑定
+        me._autoPlay();
 
       },
 
-      // todo: 获取页面数量
+      // todo: 获取页面总数
       pageCount: function () {
         return this.item.length;
       },
@@ -57,7 +54,6 @@
       // todo: 上一页
       prev: function () {
         var me = this;
-
         me.index--;
         me._switchPage();
       },
@@ -65,122 +61,172 @@
       // todo: 下一页
       next: function () {
         var me = this;
-
         me.index++;
         me._switchPage();
+
       },
 
-      // todo: 分页
-      _initPages: function () {
-        var me = this,
-            size = me.pageCount();
+      // todo: 页面布局
+      _initLayout: function () {
+        var me = this;
 
-        if (me.control.pages) {
+        // 分页布局
+        if (me.settings.pages) {
 
-          for (var i = 0; i < size; i++) {
-            me.pages.append("<span></span>");
+          // 生成分页控制点
+          var spans = "";
+          for (var i = 0; i < me.pageCount(); i++) {
+            spans += "<span></span>"
           }
+          me.pages.append(spans);
 
-          me.pages.children("span").eq(me.index).addClass("on");
+          me.pages.children("span").eq(me.index).addClass("on"); // 高亮当前索引控制点
+
+          // 生成左右切换按钮
+          if (me.settings.pagesArrows) {
+            me.element.append('<div class = "btn L">&lt;</div><div class = "btn R">&gt;</div>');
+          }
         }
 
-      },
-      
-      // todo: 布局
-      _initLayout: function () {
-        var me = this,
-            size = me.pageCount() + 1;
-
-        // 追加首元素至末尾, 用以css无缝切换
-        me.item.push(me.item.eq(0).clone().appendTo(me.items));
-
-        // 横向滑动布局
-        me.item.each(function() { $(this).css("width", 100 / size + "%"); });
-        me.items.css("width", size * 100 + "%");
-
-        // 分页按钮
-        me.element.append('<div class = "btn L"></div><div class = "btn L"></div>');
+        // 子页横向布局
+        me.items.css("width", (me.pageCount() + 1) * 100 + "%");
+        me.item.push(me.item.eq(0).clone().appendTo(me.items)); // 追加首元素至末尾, 用以css无缝切换
+        me.item.each(function () {
+          $(this).css("width", 100 / (me.pageCount()) + "%");
+        });
 
       },
 
       // todo: 事件绑定
       _initEvent: function () {
-        var me = this;
-
-        // 鼠标移入
-        me.pages.find("span").on("mouseover", function() {
-          me.index = $(this).index();
-          me._switchPage();
-        });
-
-        // 切换按钮
-        me.btn.eq(0).on("click", function() {
-          me.prev();
-        });
-        me.btn.eq(1).on("click", function() {
-          me.next();
-        });
-      },
-
-      // todo: 自动切换
-      _autoSwitch: function () {
         var me = this,
-            interval = me.settings.interval;
+          btn = me.element.children(".btn");
 
-        if (me.settings.loop) {
-
-          var t = setInterval(function() {
-            me.index++;
+        // 控制点移入切换
+        if (me.settings.pagesDot) {
+          me.pages.find("span").on("mouseover", function () {
+            me.index = me._oddIndex($(this).index());
             me._switchPage();
-          }, interval);
+          });
+        }
 
-          // 移入停止切换
-          me.element.hover(function() {
-            clearInterval(t);
-          },function() {
-            t = setInterval(function() {
-              me.index++;
-              me._switchPage();
-            }, interval);
+        // 左右切换箭头按钮
+        if (me.settings.pagesArrows) {
+          btn.eq(0).on("click", function () {
+            me.prev();
+          });
+          btn.eq(1).on("click", function () {
+            me.next();
+          });
+        }
+
+        // 绑定键盘事件
+        if (me.settings.keyboard) {
+          $(window).keydown(function (e) {
+            var keyCode = e.keyCode;
+            if (keyCode == 37 || keyCode == 38) {
+              me.prev();
+            } else if (keyCode == 39 || keyCode == 40) {
+              me.next();
+            }
+          });
+        }
+
+        // 绑定鼠标滚轮事件
+        if (me.settings.mouseRoll) {
+          me.element.on("mousewheel DOMMouseScroll", function (e) {
+            e.preventDefault();
+            var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+
+            if (delta > 0 && (me.index && !me.settings.loop || me.settings.loop)) {
+              me.prev();
+            } else if (delta < 0 && (me.index < (me.pageCount() - 1) && !me.settings.loop || me.settings.loop)) {
+              me.next();
+            }
           });
         }
 
       },
 
+      // todo: 自动播放
+      _autoPlay: function () {
+        var me = this;
+
+        if (me.settings.loop) {
+          // 设置定时器
+          var timer = setInterval(function() {
+            me.index++;
+            me._switchPage();
+          }, me.settings.interval);
+
+          // 移入清除定时器
+          me.element.hover(function() {
+            clearInterval(timer);
+          },function() {
+            timer = setInterval(function() {
+              me.index++;
+              me._switchPage();
+            }, me.settings.interval);
+          });
+        }
+      },
+
       // todo: 切换页面
       _switchPage: function () {
-        var me = this,
-            size  = me.pageCount(),
-            speed = me.settings.speed;
-
+        var me = this;
         console.log(me.index);
 
-        if (me.index == size) {
-          me.items.css({"left": "0%"});
+        // 末页切首页
+        if (me.index == me.pageCount()) {
+          me.items.css("left", "0");
           me.index = 0;
         }
 
+        // 首页切末页
         if (me.index == -1) {
-          me.items.css({"left": -(size - 2) * 100 + "%"});
-          me.index = size - 2;
+          me.items.css("left", -(me.pageCount() - 2) * 100 + "%");
+          me.index = me.pageCount() - 2;
         }
 
-        // 偏移切换动画
-        me.items.stop().animate({
-          left: -(me.index * 100) + "%"
-        }, speed);
-
-        // 左末切换 高亮标识切换 L
-        if (me.index == size - 1) {
-          me.pages.children("span").eq(0).addClass("on").siblings().removeClass("on");
-        }else{
+        // 控制点高亮切换
+        if (me.index >= me.pageCount() - 1) {
+          me.pages.children("span").eq(0).addClass("on").siblings().removeClass("on")
+        } else {
           me.pages.children("span").eq(me.index).addClass("on").siblings().removeClass("on");
         }
 
+        // 过渡动画
+        me.items.stop().animate({
+          left: -(me.index * 100) + "%"
+        }, me.settings.speed);
+      },
+
+      // todo: IE8控制点索引受PIE生成的元素影响, 这里做一个索引转换
+      _oddIndex: function (index) {
+        var me = this;
+        if (!me.isIE8) return index;
+
+        var arr = [1];
+
+        for (var i = 1; i <= me.pageCount(); i++) {
+          arr.push(arr[arr.length - 1] + 2);
+        }
+
+        // 让IE8兼容indexOf方法
+        if (!Array.prototype.indexOf) {
+          Array.prototype.indexOf = function(val){
+            var me = this;
+            for(var i =0; i < me.length; i++){
+              if(me[i] == val) return i;
+            }
+            return -1;
+          };
+        }
+
+        return arr.indexOf(index);
       }
 
     };
-
     return PageSlide;
   })();
 
@@ -192,11 +238,12 @@
       var me = $(this),
         instance = me.data("PageSlide"); // 获取实例对象
 
-      // 若无此实例，在创建实例对象
+      // 若实例不存在，则创建实例对象
       if (!instance) {
         me.data("PageSlide", (instance = new PageSlide(me, options)));
       }
-      // 若实例已存在，直接返回
+
+      // 若实例已存在，直接返回该实例
       if ($.type(options) === "string") return instance[options]();
     });
 
@@ -204,31 +251,23 @@
 
   // 默认配置参数
   $.fn.PageSlide.defaults = {
-
-    index: 0, // 初始页索引
-
-    // 元素
-    selectors: {
-      items: ".items",   // 容器
-      item: ".item",     // 子项
-      pages: ".pages",   // 分页
-      active: ".active"  // 活动页
+    selector: {
+      items: ".items", // 容器
+      item: ".item",   // 子项
+      pages: ".pages"  // 分页
     },
 
-    // 控制
-    control: {
-      pages: true,       // 启用分页
-      pagesArrows: true, // 分页箭头控制
-      pagesDot: true,    // 分页点控制
-      keyboard: false    // 启用键盘控制
-    },
+    index: 0,          // 索引
 
-    // 动画
-    animation: {
-      loop: false,       // 启用循环动画
-      interval: 1500,    // 循环间隔
-      speed: 800         // 动画时间
-    }
+    loop: true,        // 启用循环切换
+    interval: 1500,    // 切换间隔
+    speed: 800,        // 过渡时间
+
+    pages: true,       // 启用分页
+    pagesArrows: true, // 分页箭头控制
+    pagesDot: true,    // 分页点控制
+    keyboard: false,   // 启用键盘控制
+    mouseRoll: false  // 启用鼠标滚轮控制
   }
 
 })(jQuery);

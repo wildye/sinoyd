@@ -12,7 +12,7 @@ a {
 }
 .btn.submit {
   margin-left: 5px;
-  color: #fff;
+  color: #ffffff;
   background: #FF4400;
 }
 body {
@@ -81,33 +81,39 @@ body {
 .group .row > div {
   display: inline-block;
 }
-.row .head {
+.group .head {
   width: 50px;
   color: #666;
 }
-.row .body {
+.group .body {
   flex: 1;
 }
-.row .body > span {
+.group .body > span {
   display: inline-block;
   padding: 0 15px;
   cursor: pointer;
 }
-.row .body > span:hover {
+.group .body > span:hover {
   color: #FF4400;
 }
-.row .foot {
+.group .body > span.active {
+  color: blue !important;
+}
+.group .foot {
   width: 100px;
   text-align: right;
 }
-.row .foot span {
+.group .foot span {
   display: inline-block;
   margin-left: 10px;
   padding: 0 5px;
   cursor: pointer;
 }
-.row .foot span:first-child {
+.group .foot span:first-child {
   height: 20px;
   line-height: 20px;
 }
-/*# sourceMappingURL=master.css.map */
+.price {
+  padding-top: 12px;
+  padding-left: 25px;
+}

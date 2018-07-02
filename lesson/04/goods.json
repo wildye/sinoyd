@@ -3,70 +3,70 @@
     "id": "01",
     "name": "松茸",
     "brand": "百山祖",
-    "locality": "香格里拉",
-    "price": "35.5"
+    "yieldly": "香格里拉",
+    "price": "10"
   },
   {
     "id": "02",
     "name": "油焖冬笋",
     "brand": "知味观",
-    "locality": "浙江",
-    "price": "64.8"
+    "yieldly": "浙江",
+    "price": "20"
   },
   {
     "id": "03",
     "name": "黄豆酸笋小黄鱼",
     "brand": "徐福记",
-    "locality": "广西柳州",
-    "price": "32.5"
+    "yieldly": "广西柳州",
+    "price": "30"
   },
   {
     "id": "04",
     "name": "莴笋炒火腿",
-    "brand": "御食园",
-    "locality": "云南大理",
-    "price": "18"
+    "brand": "百草园",
+    "yieldly": "云南大理",
+    "price": "40"
   },
   {
     "id": "05",
     "name": "莲藕炖排骨",
     "brand": "知味观",
-    "locality": "湖北嘉鱼",
-    "price": "55.9"
+    "yieldly": "湖北嘉鱼",
+    "price": "50"
   },
   {
     "id": "06",
     "name": "湖水大鱼",
     "brand": "御食园",
-    "locality": "吉林查干湖",
-    "price": "37.8"
+    "yieldly": "吉林查干湖",
+    "price": "60"
   },
   {
     "id": "07",
     "name": "鱼头泡饼",
-    "brand": "御食园",
-    "locality": "吉林查干湖",
-    "price": "33"
+    "brand": "三味书屋",
+    "yieldly": "吉林查干湖",
+    "price": "70"
   },
   {
     "id": "08",
     "name": "香煎马鲛鱼",
     "brand": "知味观",
-    "locality": "海南",
-    "price": "25.2"
+    "yieldly": "海南",
+    "price": "80"
   },
   {
     "id": "09",
     "name": "酸菜鱼汤",
     "brand": "御食园",
-    "locality": "海南",
-    "price": "12.9"
+    "yieldly": "海南",
+    "price": "90"
   },
   {
     "id": "10",
     "name": "水煮红螺",
     "brand": "百山祖",
-    "locality": "海南",
-    "price": "29.9"
+    "yieldly": "海南",
+    "price": "100"
   }
 ]
