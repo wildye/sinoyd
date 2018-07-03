@@ -7,17 +7,43 @@
   <!--[if lte IE 8]>
   <script src="static/js/PIE/PIE.js"></script>
   <![endif]-->
+  <style>
+    /* 容器元素测试 */
+    .container {
+      margin: 0;
+      height: 100%; /* 容器元素高度必须设置 */
+    }
+    @media (min-width: 768px) {
+      .container {
+        margin: 0 auto;
+        width: 600px;
+        height: 400px;
+      }
+    }
+    @media (min-width: 992px) {
+      .container {
+        width: 800px;
+        height: 500px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div data-PageSlide>
-  <div class="items">
-    <div class="item item1"></div>
-    <div class="item item2"></div>
-    <div class="item item3"></div>
-    <div class="item item4"></div>
+  <!-- 容器 -->
+  <div class="container">
+
+    <!-- 基础结构 -->
+    <div data-PageSlide>
+      <div class="items">
+        <div class="item item1"></div>
+        <div class="item item2"></div>
+        <div class="item item3"></div>
+        <div class="item item4"></div>
+      </div>
+      <div class="pages"></div>
+    </div>
+
   </div>
-  <div class="pages"></div>
-</div>
 <script src="static/js/jquery-1.12.4.js"></script>
 <script src="static/js/jquery.pageSlide.js"></script>
 

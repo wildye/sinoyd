@@ -2,6 +2,7 @@ body {
   font-family: '微软雅黑', 'Microsoft YaHei';
 }
 a {
+  color: inherit;
   text-decoration: none;
 }
 .login {
@@ -104,4 +105,3 @@ a {
   display: inline-block;
   margin: 0 10px;
 }
-/*# sourceMappingURL=master.css.map */

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/master.css">
+</head>
+<body>
+    <nav></nav>
+
+<script src="../lib/jquery-1.12.4.js"></script>
+<script>
+    
+    (function(path){
+        readJson(path, data => {
+            $('nav').html(toTree(data));
+        })
+    })('./menu.json')
+
+    function toTree(data) {
+        let tpl = '<ul class="nav-top">';
+        console.log(data);
+        data.forEach(function(val) {
+            let label = val.subset ? ' class="more"' : ''
+            tpl += '<li' + label + '><a href="' + val.href + '">' + val.title + '</a><ul>' + createLi(val.subset, "")+'</ul></li>';
+        })
+        return tpl + '</ul';
+    };
+
+    function createLi (list, str) {
+        if (!list) return str;
+        list.forEach(function(val) {
+            let label = val.subset ? ' class="more"' : ''
+            str += '<li' + label + '><a href="' + val.link + '">' + val.title + '</a><ul>' + createLi(val.subset, "")+'</ul></li>';
+        });
+        return str;
+    }
+
+    // 读取 json 文件
+    function readJson (filePath, callback) {
+      let promise = new Promise(function(success, failure) {
+        $.get(filePath, function(result) {
+          success(result);
+        }, "json");
+      });
+      promise.then(function(result) {
+        callback(result)
+      }, function (error) {
+        console.log(error)
+      })
+    }
+</script>
+</body>
+</html>
