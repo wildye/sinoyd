@@ -539,7 +539,7 @@ html {
 .fr {
   float: right;
 }
-header .container-fuild {
+header .container-fuild:first-child {
   color: #fff;
   background: #70C570 url('../image/nav-bg.jpg') left bottom repeat-x;
 }
