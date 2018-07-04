@@ -107,7 +107,7 @@
         $('.submit').on('click', function() {
           const name = ['brand', 'yieldly', 'price'];
           let form = $("<form method='get' active='#'></form>");
-
+  
           select.forEach(function(item, i) {
             for (let val of item) {
               form.append($("<input type='hidden' name=" + name[i] + " value=" + val + ">"))

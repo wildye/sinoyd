@@ -1,4 +1,5 @@
 /* html5 Reset Stylesheet */
+@import '_icon.css';
 html,
 body,
 div,
@@ -539,45 +540,6 @@ html {
 .fr {
   float: right;
 }
-header .container-fuild:first-child {
-  color: #fff;
-  background: #70C570 url('../image/nav-bg.jpg') left bottom repeat-x;
-}
-header .nav-top ul::after {
-  content: '';
-  display: inline-block;
-  clear: both;
-}
-header .nav-top li {
-  float: left;
-  padding-top: 1.3rem;
-}
-header .nav-top li:not(:first-child) {
-  margin-left: .58rem;
-}
-header .nav-top li:not(:last-child) > a:hover {
-  background: #de6b2c;
-  box-shadow: 0 3px 3px #ba551d;
-}
-header .nav-top a {
-  display: block;
-  padding: .7rem .94rem .58rem .76rem;
-  line-height: .8rem;
-  font-size: .8rem;
-  border-radius: 3px;
-}
-header .nav-top a.active {
-  background: #5d9e5a;
-  box-shadow: 0 3px 3px #4a7e47;
-}
-header .nav-top a:not(:last-child) {
-  color: #de6b2c;
-}
-nav {
-  height: 4.7rem;
-  line-height: 4.7rem;
-  box-sizing: border-box;
-}
 .logo {
   font-size: 1.4rem;
   font-weight: 300;
@@ -586,4 +548,73 @@ nav {
   padding-right: 2px;
   font-size: 1.15em;
   font-weight: 600;
+}
+nav.container-fuild {
+  height: 4.7rem;
+  line-height: 4.7rem;
+  color: #fff;
+  box-sizing: border-box;
+}
+nav.container-fuild:first-child {
+  background: #70C570 url('../image/nav-bg.jpg') left bottom repeat-x;
+}
+/* menu layout */
+ul.nav-top::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+ul.nav-top > li {
+  float: left;
+}
+ul.nav-top li {
+  position: relative;
+}
+ul.nav-top li:hover {
+  margin-top: 0;
+  margin-left: 0;
+}
+ul.nav-top li ul {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  background: #5d9e5a;
+}
+ul.nav-top li:hover > ul {
+  visibility: visible;
+  opacity: 1;
+}
+ul.nav-top ul ul {
+  top: 0;
+  left: 100px;
+  margin-top: 20px;
+  margin-left: 20px;
+  box-shadow: 2px 2px 5px #666;
+}
+ul.nav-top li {
+  margin-left: .58rem;
+  padding-top: 1.3rem;
+  float: left;
+}
+ul.nav-top li:not(:last-child) > a:hover {
+  background: #de6b2c;
+  box-shadow: 0 3px 3px #ba551d;
+}
+ul.nav-top a {
+  display: block;
+  padding: .7rem .94rem .58rem .76rem;
+  line-height: .8rem;
+  font-size: .8rem;
+  border-radius: 3px;
+}
+ul.nav-top a.active {
+  background: #5d9e5a;
+  box-shadow: 0 3px 3px #4a7e47;
+}
+ul.nav-top a:not(:last-child) {
+  color: #de6b2c;
 }

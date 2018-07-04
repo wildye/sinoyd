@@ -1,6 +1,7 @@
 @import './_reset.less';
 @import './_mixin.less';
 @import './_grid.less';
+@import './_icon.css';
 
 html {
     font-size: 10px;
@@ -22,59 +23,92 @@ html {
     float: right;
 }
 
-header {
-    .container-fuild {
-        &:first-child {
-            color: #fff;
-            background: #70C570 url('../image/nav-bg.jpg') left bottom repeat-x;
-        }
+.logo {
+    font-size: 1.4rem;
+    font-weight: 300;
+    span {
+        padding-right: 2px;
+        font-size: 1.15em;
+        font-weight: 600;
     }
-    .nav-top {
-    ul {
-        &::after {
-            content: '';
-            display: inline-block;
-            clear: both;
-        }
+}
+
+nav.container-fuild {
+    height: 4.7rem;
+    line-height: 4.7rem;
+    color: #fff;
+    box-sizing: border-box;
+    &:first-child {
+        background: #70C570 url('../image/nav-bg.jpg') left bottom repeat-x;
+    }
+}
+
+/* menu layout */
+ul.nav-top {
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    > li {
+        float: left;
     }
     li {
-        float: left;
-        padding-top: 1.3rem;
-    &:not(:first-child) {
+        position: relative;
+        &:hover {
+            margin-top: 0; // animation
+            margin-left: 0; // animation
+        }
+        ul {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            z-index: 1;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .2s ease-in-out; // animation
+            background: #5d9e5a;
+        }
+    }
+    li:hover {
+        > ul {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    ul {
+        ul {
+            top: 0;
+            left: 100px;
+            margin-top: 20px; // animation
+            margin-left: 20px; // animation
+            box-shadow: 2px 2px 5px #666; // animation
+        }
+    }
+}
+
+ul.nav-top {
+    li {
         margin-left: .58rem;
+        padding-top: 1.3rem;
+        float: left;
+        &:not(:last-child) > a:hover {
+            background: #de6b2c;
+            box-shadow: 0 3px 3px darken(#de6b2c, 10%);
+        }
     }
-    &:not(:last-child) > a:hover {
-        background: #de6b2c;
-        box-shadow: 0 3px 3px darken(#de6b2c, 10%);
+    a {
+        display: block;
+        padding: .7rem .94rem .58rem .76rem;
+        line-height: .8rem;
+        font-size: .8rem;
+        border-radius: 3px;
+        &.active {
+            background: #5d9e5a;
+            box-shadow: 0 3px 3px darken(#5d9e5a, 10%);
+        }
+        &:not(:last-child) {
+            color: #de6b2c;
+        }
     }
-}
-a {
-display: block;
-padding: .7rem .94rem .58rem .76rem;
-line-height: .8rem;
-font-size: .8rem;
-border-radius: 3px;
-&.active {
-background: #5d9e5a;
-box-shadow: 0 3px 3px darken(#5d9e5a, 10%);
-}
-&:not(:last-child) {
-color: #de6b2c;
-}
-}
-}
-}
-nav {
-height: 4.7rem;
-line-height: 4.7rem;
-box-sizing: border-box;
-}
-.logo {
-font-size: 1.4rem;
-font-weight: 300;
-span {
-padding-right: 2px;
-font-size: 1.15em;
-font-weight: 600;
-}
 }

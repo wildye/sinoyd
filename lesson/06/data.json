@@ -1,0 +1,46 @@
+{
+    "menu":[
+        {
+            "title": "HOME",
+            "link": "#"
+        },
+        {
+            "title": "ABOUT",
+            "link": "#"
+        },
+        {
+            "title": "SERVICES",
+            "link": "#"
+        },
+        {
+            "title": "PORTFOLIO",
+            "link": "#",
+            "subset": [
+                {
+                    "title": "Portfolio 2 column page",
+                    "link": "#"
+                },
+                {
+                    "title": "Portfolio 2 column page",
+                    "link": "#"
+                },
+                {
+                    "title": "Portfolio 2 column page",
+                    "link": "#"
+                }
+            ]
+        },
+        {
+            "title": "BLOG",
+            "link": "#"
+        },
+        {
+            "title": "FEATURES",
+            "link": "#"
+        },
+        {
+            "title": "CONTACTS",
+            "link": "#"
+        }
+    ]
+}
